@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="expires" content="0">
+    <title>THPower Cloud</title>
+    <link rel="shortcut icon" href="static/icons/favicon.ico">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-select.min.css" >
+    <link rel="stylesheet" href="main/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main/layui/css/layui.css">
+    <link rel="stylesheet" href="main/vstyles/style2.css"/>
+    <link rel="stylesheet" href="static/styles/GModel.css">
+    
+    <script type="text/javascript" src="main/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="main/js/viewpage.js"></script>
+    <script type="text/javascript" src="main/numeral/numeral.min.js"></script>
+    <script type="text/javascript" src="main/app/thpower-public.js"></script>
+    <script type="text/javascript" src="main/app/thpower-utils.js"></script>
+
+    <script type="text/javascript">
+	    var urlParams = (function (url) {
+	        var result = new Object();
+	        var idx = url.lastIndexOf('?');
+	
+	        if (idx > 0) {
+	            var params = url.substring(idx + 1).split('&');
+	
+	            for (var i = 0; i < params.length; i++) {
+	                idx = params[i].indexOf('=');
+	
+	                if (idx > 0) {
+	                    result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+	                }
+	            }
+	        }
+	
+	        return result;
+	        
+		})(window.location.href);
+
+        var RESOURCES_PATH = 'static/resources';
+        var STENCIL_PATH = 'static/stencils';
+        var IMAGE_PATH = 'static/images';
+        var STYLE_PATH = 'static/editor';
+        var CSS_PATH = 'static/styles';
+
+        mxBasePath = 'static/mxgraph';
+        xmlBaseContent = '';
+
+        var projectData;
+        
+    </script>
+
+    <!-- Loads and initializes the library -->
+    <script type="text/javascript" src="static/mxgraph/js/mxClient.js"></script>
+    <script type="text/javascript" src="static/thpower/main-editor.js"></script>
+    <script type="text/javascript" src="static/sanitizer/sanitizer.min.js"></script>
+    <script type="text/javascript" src="static/js/Graph.js"></script>
+    <script type="text/javascript" src="static/js/Shapes.js"></script>
+    <script type="text/javascript" src="static/js/echarts.js"></script>
+    <script type="text/javascript" src="static/js/Time.js"></script>
+    <script type="text/javascript" src="static/app/option.js"></script>
+
+    <script type="text/javascript" src="static/js/GModel.js"></script>
+    <script type="text/javascript" src="static/js/GEvent.js"></script>
+    <script type="text/javascript" src="main/js/viewer.js"></script>
+    <script type="text/javascript" src="main/js/charts.js"></script>
+    <script type="text/javascript" src="main/js/toolbar.js"></script>
+    <script type="text/javascript" src="static/js/CreateTable.js"></script>
+    <script type="text/javascript" src="static/js/Viewchart.js"></script>
+    
+    <style>
+    
+        html,body{
+        	height:100%;
+        }
+        
+        .header-demo {
+            /*left: 100px;*/
+         }
+         .header{
+         	height: 60px;
+         }
+         
+        .component {
+		    position: absolute;
+		    width: 200px;
+		    left: 320px;
+		    top: 10px;
+		}
+		
+		.menu {
+            position: absolute;
+            top: 60px;
+            bottom: 0;
+            width: 200px;
+            background: #1b6d85;
+        }
+        
+		.btn-full{
+            width: 100%;
+            border-radius: 0;
+        }
+        
+		#downBtn{
+            display: none;
+        }
+               
+        .container {
+             position: absolute;
+             top: 60px;
+             left: 200px;
+			 padding-right: 0px;
+			 padding-left: 0px;
+			 margin-right: auto;
+			 margin-left: auto;
+			 @media (min-width: 768px) {
+			 .container {
+			 width: 750px;
+			 }
+			 @media (min-width: 992px) {
+			 .container {
+			 width: 970px;
+			 }
+			 @media (min-width: 1200px) {
+			 .container {
+			 width: 1170px;
+			 }
+		}	
+
+		/* navbar */
+		.navbar-default {	 
+		 background-color: #344357;
+		 border-color: #E7E7E7;
+		}
+		/* title */
+		.navbar-default .navbar-brand {
+		 color: #777;
+		}
+		.navbar-default .navbar-brand:hover,
+		.navbar-default .navbar-brand:focus {
+		 color: #5E5E5E;
+		}
+		/* link */
+		.navbar-default .navbar-nav > li > a {
+		 color: #777;
+		}
+		.navbar-default .navbar-nav > li > a:hover,
+		.navbar-default .navbar-nav > li > a:focus {
+		 color: #333;
+		}
+		.navbar-default .navbar-nav > .active > a, 
+		.navbar-default .navbar-nav > .active > a:hover, 
+		.navbar-default .navbar-nav > .active > a:focus {
+		 color: #555;
+		 background-color: #E7E7E7;
+		}
+		.navbar-default .navbar-nav > .open > a, 
+		.navbar-default .navbar-nav > .open > a:hover, 
+		.navbar-default .navbar-nav > .open > a:focus {
+		 color: #555;
+		 background-color: #D5D5D5;
+		}
+		/* caret */
+		.navbar-default .navbar-nav > .dropdown > a .caret {
+		 border-top-color: #777;
+		 border-bottom-color: #777;
+		}
+		.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+		.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+		 border-top-color: #333;
+		 border-bottom-color: #333;
+		}
+		.navbar-default .navbar-nav > .open > a .caret, 
+		.navbar-default .navbar-nav > .open > a:hover .caret, 
+		.navbar-default .navbar-nav > .open > a:focus .caret {
+		 border-top-color: #555;
+		 border-bottom-color: #555;
+		}
+		/* mobile version */
+		.navbar-default .navbar-toggle {
+		 border-color: #DDD;
+		}
+		.navbar-default .navbar-toggle:hover,
+		.navbar-default .navbar-toggle:focus {
+		 background-color: #DDD;
+		}
+		.navbar-default .navbar-toggle .icon-bar {
+		 background-color: #CCC;
+		}
+		@media (max-width: 767px) {
+		 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+		 color: #777;
+		 }
+		 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+		 .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		 color: #333;
+		 }
+		}
+		.nav
+		{
+		  /*opacity: 0.5;*/		
+		}
+
+    </style>  
+</head>
+
+<body>
+<div class="layui-layout layui-layout-admin" >
+ 	<div class="layui-header header header-demo" summer>
+	  	<div class="layui-main" >  
+		    <button id="closeBtn" class="btn btn-danger">
+			    <span class="glyphicon glyphicon-menu-up"></span>
+			    <span id="downBtn" class="glyphicon glyphicon-menu-down"></span>
+		    </button>
+	        <a href="javascript:void(0)" target="_parent"><img src="main/images/syslogo.png" title="能源云监控系统"/></a>	         
+	    	<select id="projectlists" class="selectpicker component">
+		        <!--  data-live-search="true" multiple		        
+		        <option value="1">项目1</option>
+		        <option value="2">项目2</option>
+		        -->
+		    </select>
+		    <div class="topright" style="padding-top:20px; margin-right: 20px;">
+		        <div id="showDate" style="display:block; float:left; color: #fff;width: 240px;"></div>
+		        <a href="index.html" style="display:block; float:left; color: #fff;width: 50px;">退 出</a>
+		    </div>
+		  </div>
+	</div>  
+	<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+	  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+	  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]--> 
+	
+	<!-- 手风琴折叠 -->
+	<div id="leftContainer" class="layui-side layui-bg-black menu"  style="overflow-y: scroll;">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+               <a class="btn btn-primary btn-full"  role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+               	实时监控</a> 
+            	<div id="collapseOne" class="panel-collapse collapse in">
+	            	<div class="list-group" id="projectviews">
+	                </div>
+				</div>				
+               <a class="btn btn-primary btn-full"  role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+               	数据查询</a>                	
+            	<div id="collapseTwo" class="panel-collapse collapse">
+	            	<div class="list-group" id="databaseviews">
+	                </div>
+				</div>
+               <a class="btn btn-primary btn-full"  role="button" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+               	报表查询</a>                	
+            	<div id="collapseThree" class="panel-collapse collapse">
+	            	<div class="list-group" id="reportviews">
+	                </div>
+				</div>
+               <a class="btn btn-primary btn-full"  role="button" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+               	报警查询</a>                	
+            	<div id="collapseFour" class="panel-collapse collapse">
+	            	<div class="list-group" id="alarmviews">
+	                </div>
+				</div>
+               	
+       	</div>
+	</div>
+	       
+    <!-- Creates a container for the graph with a grid wallpaper -->	   
+	<div id="rightContainer" class="container" >		
+		<div id="graphContainer" class="graphContainer" style="cursor:default;">
+		</div>
+		<iframe id="webContainer" frameborder="0" scrolling="no" ></iframe>
+    </div>
+
+</div>
+
+<div class="navbar-default navbar-fixed-bottom" style="background-color: transparent;">
+    <div id="displayContainer" >
+    	<!--nav-pills，nav-tabs，nav-stacked :改变选项卡的样式  class="container-fluid"  -->
+    	<div class="row" style="padding-right: 50px;">
+	     	<ul class="nav nav-pills navbar-right" >
+	          <li class="active"><a href="javascript:void(0);" onclick="DisplayClick(1)">报警</a></li>
+	          <!-- <li><a href="javascript:void(0);" onclick="DisplayClick(0)">隐藏</a> </li> --> 
+	        </ul>  
+        </div>             
+    	<div class="row">
+			<iframe id="alarmContainer" frameborder="0" scrolling="no" style="display: none; width: 100%;" ></iframe>
+		</div>
+    </div>
+</div>
+
+	
+<div style="position: absolute;display:none;" id="div_toolbar">
+    <!--工具栏 -->
+    <div class="btn-wrap" style="border: 1px solid #ddd;">
+        <button type="button" class="btn btn-lg save" id="btn_restore">还原</button>
+        <!--<button type="button" class="btn  btn-lg cancel" >-->
+        <!--当前-->
+        <!--</button>-->
+        <button type="button" class="btn btn-lg exprot" style="width: 100px;" id="btn_option" data-toggle="modal"
+                data-target="#optionModal"> 更改范围         </button>
+        <button type="button" class="btn btn-lg refresh play" id="btn_PlayTimer">播放 </button>
+        <!--<button type="button" class="btn btn-lg refresh next"  >-->
+        <!--快进-->
+        <!--</button>-->
+        <!--<button type="button" class="btn btn-lg refresh pre" >-->
+        <!--后退-->
+        <!--</button>-->
+        <!--<button type="button" class="btn btn-lg refresh" >-->
+        <!--选项-->
+        <!--</button>-->
+    </div>
+</div>
+
+<!--更改设置模态框（Modal）-->
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   	<div class="modal-dialog" style="width: 680px">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">选项</h4>
+        </div>
+        <div class="modal-body">
+
+            <div>
+                <!--区域-->
+                <div class="sub_nav">
+                    <ul class="sub_nav_title">
+                        <li class="sub_nav_title_item">
+                            <span class="sub_nav_title_item_span"></span>
+                            <a href="javascript:;">时间范围</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <!--<div class="sl-v-list_input" >-->
+                    <!--<div class="div_block">-->
+                    <!--<span>显示范围：</span>-->
+                    <!--<select class="select_dropdwon" >-->
+                    <!--<option value="1"></option>-->
+                    <!--<option value="2"></option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="sl-v-list_input">
+                        <div class="div_block">
+                            <div class="jeitem">
+                                <label class="jelabel">开始时间：</label>
+                                <div class="jeinpbox"><input type="text" class="jeinput" id="date_start"
+                                                             placeholder="YYYY-MM-DD hh:mm:ss"></div>
+                            </div>
+                        </div>
+                        <div class="div_block div_block_margin">
+                            <div class="jeitem">
+                                <label class="jelabel">结束时间：</label>
+                                <div class="jeinpbox"><input type="text" class="jeinput" id="date_end"
+                                                             placeholder="YYYY-MM-DD hh:mm:ss"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--区域-->
+                <div class="sub_nav">
+                    <ul class="sub_nav_title">
+                        <li class="sub_nav_title_item">
+                            <span class="sub_nav_title_item_span"></span>
+                            <a href="javascript:;">刷新</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="sl-v-list_input">
+                        <div class="div_block">
+                            <span>刷新频率：</span>
+                            <input type="text" width="50px" placeholder="1" value="1"
+                                   style="height: 28px;border: 1px solid #ddd;" id="txt_frequency"/>
+                        </div>
+                        <div class="div_block div_block_margin">
+                            <select class="select_dropdwon" id="dropdwon_frequency">
+                                <option value="1">分钟</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sl-v-list_input">
+                        <div class="div_block">
+                            <span>刷新速度：</span>
+                            <input type="text" width="50px" placeholder="60" value="60"
+                                   style="height: 28px;border: 1px solid #ddd;" id="txt_interval"/>
+                        </div>
+                        <div class="div_block div_block_margin">
+                            <select class="select_dropdwon" id="dropdwon_interval">
+                                <option value="1">分钟</option>
+                                <option value="2">秒</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="btn_ok">确定</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+	
+	var showmenu=true;
+	
+	var showalarm = false;
+
+    function DisplayClick(bshow) {
+    	showalarm = !showalarm;
+    	if (showalarm)
+		{
+			$("#displayContainer").animate({height:"300px"},500);
+			$("#alarmContainer").show();
+	        $("#alarmContainer").attr("src", "test.html");
+	        $("#alarmContainer").css({height:"264px"});
+		}else
+			{
+			$("#displayContainer").animate({height:"10px"},500);
+			$("#alarmContainer").hide();
+	        $("#alarmContainer").attr("src", "");
+
+			}
+    	
+		//alert("hello world");
+    }   
+
+    $(function () {    	
+    	
+    	var proid = urlParams['proid'];
+    	
+    	if(proid==null)
+   		{
+    		//window.location='index.html';
+   		}
+   	
+        document.oncontextmenu = function(){
+            return false;
+        }
+
+        //$(".selectpicker").selectpicker({
+		//	noneSelectedText : '请选择'//默认显示内容
+		//});
+        
+        //左部导航切换
+        $("#closeBtn").click(function () {
+        	showmenu = !showmenu;
+            $(".menu").toggle(500,function () {
+                $(".glyphicon-menu-down").toggle();
+                $(".glyphicon-menu-up").toggle();
+            });
+            IFrameResize();
+        });
+
+        ////////////////////////////////////////////////////////////////
+        ////画面定时刷新
+        //setInterval("refresh();",5000); //每隔5秒运行一次
+        ////时间定时刷新
+        //setInterval("getTime();",5000); //每隔5秒运行一次        
+
+         <!-- <a href="#" class="list-group-item">谷歌</a>-->
+         //database 
+         
+         $.each(database_view_data, function(i, item){
+	         var item_html= '<a class="list-group-item" href="javascript:void(0);" onclick="DatabaseClick('+ i +')">' +  item.viewName + '</a>';
+	         
+	         $("#databaseviews").append(item_html);
+         });
+         
+         //report 
+         
+         $.each(report_view_data, function(i, item){
+	         var item_html= '<a class="list-group-item" href="javascript:void(0);" onclick="ReportClick('+ i +')">' +  item.viewName + '</a>';
+	
+	         $("#reportviews").append(item_html);
+         });
+         
+         //alarm 
+         
+         $.each(alarm_view_data, function(i, item){
+	         var item_html= '<a class="list-group-item" href="javascript:void(0);" onclick="AlarmClick('+ i +')">' +  item.viewName + '</a>';
+	
+	         $("#alarmviews").append(item_html);
+         });
+
+        //初始化宽度、高度
+        $(window).resize(function () {
+            
+            if(showmenu)
+           	{
+                $("#graphContainer").height($(window).height() - 60);
+                $("#graphContainer").width($(window).width() - 200); 
+                
+
+                $("#webContainer").height($(window).height() - 60);
+                $("#webContainer").width($(window).width() - 200);      
+           	}else
+           	{
+                $("#graphContainer").height($(window).height() - 60);
+                $("#graphContainer").width($(window).width()); 
+                
+
+                $("#webContainer").height($(window).height() - 60);
+                $("#webContainer").width($(window).width());      
+           	}
+
+
+        });
+
+        loadProLists();
+
+        refresh();
+        
+        getTime();        
+
+    });
+    
+
+
+    function getTime() 
+    {
+        var dtCurrent = new Date();
+
+        $("#showDate").html("当前时间： " + dtCurrent.Format("yyyy-MM-dd HH:mm:ss")); //将值赋给div
+    }
+    
+    function loadProLists()
+    {
+        //localStorage
+        var jsonProject = localStorage.getItem("thpcloud.projects");
+        var objProject = JSON.parse(jsonProject);        
+        
+        <!-- <option value="2">项目2</option> -->
+        objProject.forEach(function(value, index, array) {
+    		// 第一个参数是遍历的数组内容，第二个参数是对应的数组索引，第三个参数是数组本身        
+            var item_html = '<option value="'+value.id +'">'+ value.name + '</option>';
+             $("#projectlists").append(item_html);
+        });
+
+        $('.selectpicker').selectpicker('refresh');
+
+        //simuId = GetQueryString("proid");
+        //simuName = GetQueryString("proname");   	
+        
+        simuId = objProject[0].id;
+
+        $('.selectpicker').selectpicker('val', simuId);
+    
+        loadProject(simuId);
+    }
+
+    
+    function loadProject(simuId) {
+        $.get(
+            '/THPBuilder/loadProject',
+            {proid: simuId},
+            function (response, status, jxhr) {
+                if (status == "success") {
+                    projectData = response.diagram.project;
+
+                    //如果没数据，调用模拟数据
+                    if (projectData == null || projectData == '') {
+                        projectData = menu_data;
+                    }
+
+                    //$('#projectviews').html("");
+                    $('#projectviews').empty();
+                    
+                    $.each(projectData, function (i, item) {
+                        var item_html = '<a class="list-group-item" href="javascript:void(0);" onclick="ProjectClick('+ i +')">' +  item.appName + '</a>';
+                         $("#projectviews").append(item_html);
+                    });
+
+                    ProjectClick(0);
+
+                } else {
+                    alert("load project error!");
+                }
+            },
+            'json'
+        );
+    }
+    
+    $('#projectlists').on('change', function () {
+    	
+    	simuId =$(this).val();
+    	
+    	 loadProject(simuId);
+    });
+
+    function ProjectClick(index) {
+        if (index == null || index < 0 || index > projectData.length)
+            return;
+        
+        $("#graphContainer").show();      
+        $("#webContainer").hide();
+        
+        //调整宽度
+        var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
+        if (winWidth <= 0) winWidth = 600;   // 初始高度并不总能取出，设默认值
+        
+        var winHeight = document.body.scrollHeight * 2;
+        if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
+
+        var myDiv = document.getElementById('graphContainer');   //  div
+        myDiv.style.width = winWidth + 'px';        // 设置宽度       
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+
+        myDiv = document.getElementById('leftContainer');   //  div
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+
+        //xmlBaseContent = menu_data[index].contents;
+        xmlBaseContent = projectData[index].appRoot;
+        main(document.getElementById('graphContainer'));
+    }
+        
+    function DatabaseClick(index) {
+        if (index == null || index < 0 || index > database_view_data.length)
+            return;
+        
+        url = database_view_data[index].viewUrl;
+
+        $("#graphContainer").hide();  
+        $("#webContainer").show();        
+
+        var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
+        if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
+        
+        var winHeight = document.body.scrollHeight * 2;
+        if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
+
+        var myDiv = document.getElementById('webContainer');   //  div
+        myDiv.style.width = winWidth + 'px';        // 设置宽度
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+
+        myDiv = document.getElementById('leftContainer');   //  div
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+
+        //myDiv = document.getElementById('webDiv');   //  div
+        //myDiv.style.width = winWidth + 'px';        // 设置宽度
+        //myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+        $("#webContainer").attr("src", url);
+        
+        //xmlBaseContent = menu_data[index].appRoot;
+
+        //main(document.getElementById('graphContainer'));
+    }
+    
+    function ReportClick(index) {
+        if (index == null || index < 0 || index > report_view_data.length)
+            return;
+        
+        url = report_view_data[index].viewUrl;
+
+        $("#graphContainer").hide();        
+        //$("#webDiv").show();        
+        $("#webContainer").show();        
+
+        var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
+        if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
+        
+        var winHeight = document.body.scrollHeight * 2;
+        if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
+
+        var myDiv = document.getElementById('webContainer');   //  div
+        myDiv.style.width = winWidth + 'px';        // 设置宽度
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+
+        myDiv = document.getElementById('leftContainer');   //  div
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+        //myDiv = document.getElementById('webDiv');   //  div
+        //myDiv.style.width = winWidth + 'px';        // 设置宽度
+        //myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+        $("#webContainer").attr("src", url);
+        
+        //xmlBaseContent = menu_data[index].appRoot;
+
+        //main(document.getElementById('graphContainer'));
+    }
+    
+    function AlarmClick(index) {
+        if (index == null || index < 0 || index > alarm_view_data.length)
+            return;
+        
+        url = alarm_view_data[index].viewUrl;
+
+        $("#graphContainer").hide();        
+        //$("#webDiv").show();        
+        $("#webContainer").show();        
+
+        var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
+        if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
+        
+        var winHeight = document.body.scrollHeight * 2;
+        if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
+
+        var myDiv = document.getElementById('webContainer');   //  div
+        myDiv.style.width = winWidth + 'px';        // 设置宽度
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+
+        myDiv = document.getElementById('leftContainer');   //  div
+        myDiv.style.height = winHeight + 'px';      // 设置高度
+        
+        $("#webContainer").attr("src", url);
+        
+        //xmlBaseContent = menu_data[index].appRoot;
+
+        //main(document.getElementById('graphContainer'));
+    }
+
+	//一般直接写在一个js文件中
+	/*
+	layui.use(['layer', 'form'], function(){
+	  var layer = layui.layer
+	  ,form = layui.form;	  
+	  //layer.msg('Hello World');	  
+	  
+	  form.render();
+	});
+	*/
+	
+	function IFrameResize()
+	{
+		if (showmenu)
+		{
+			$('#rightContainer').css({'left': '200px'});
+		}else
+		{
+			$('#rightContainer').css({'left': '0px'});
+		}	
+	}
+	
+</script> 
+
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<title>THPower Cloud</title>
+	<link href="../static/easyui/themes/icon.css" rel="stylesheet" />
+	<link href="../main/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../static/easyui/themes/default/easyui.css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="../main/js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="../main/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../main/js/multiselect.js"></script>
+	<script type="text/javascript" src="../main/easyui/jquery.easyui.min.js"></script>
+	
+	<script type="text/javascript" src="../main/app/thpower-utils.js"></script>
+		
+	<script type="text/javascript">
+    var urlParams = (function (url) {
+        var result = new Object();
+        var idx = url.lastIndexOf('?');
+
+        if (idx > 0) {
+            var params = url.substring(idx + 1).split('&');
+
+            for (var i = 0; i < params.length; i++) {
+                idx = params[i].indexOf('=');
+
+                if (idx > 0) {
+                    result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                }
+            }
+        }
+
+        return result;
+        
+	})(window.location.href);    
+    
+	//html打开时执行查询参数类别的信息
+	$(function() {	
+		
+		var userId = urlParams['userId'];
+    	
+    	if(userId==null)
+   		{
+    		//window.location='index.html';
+   		}
+    	
+    	//工程信息
+		$.ajax({
+			type : 'POST',
+			url : '/THPBuilder/getSharedProjects',
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			//contentType : 'application/json',
+			data : {"userId": userId},
+			dataType : 'json',
+			async : true,
+			success : function(data, textStatus) {	
+				
+				//console.log(data);	
+
+				//$('#showtypes').find("option").remove();//删除之前的数据
+				$("#showprojects").empty();
+				
+                var s = '';
+                for (var i = 0; i < data.rows.length; i++)
+               	{
+                   	s += '<option value=' + data.rows[i].proId + '>' + data.rows[i].proName + '</option>';               		
+                }
+                
+                $('#showprojects').append(s);                
+			
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				console.log("请求失败，无法获取分组数据");
+			}
+		});
+    	
+		
+	})
+	
+	function projectChange()
+	{
+		//记录选中的项目ID
+		proId = $('#showprojects').val();		
+		window.selectproject=proId;
+		
+		var oproject = JSON.parse(localStorage.getItem('thpcloud.openproject'));
+
+		if(oproject!=null)
+		{		
+	        //var oproject ={'curProId':simuId, 'newProId':''}; 
+	        oproject.newProId = parseInt(proId);
+	        localStorage.setItem('thpcloud.openproject', JSON.stringify(oproject));		
+		}
+	}
+	
+	
+</script>
+</head>
+<body >
+	<div class="row"  style="width: 300px;" >
+		<div class="col-xs-7">
+			<span id="proname">工程列表:</span>
+		</div>
+		<div class="col-xs-5">
+			<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onclick="saveRelations()">确 定</a> -->
+		</div>
+	</div>
+	<div class="row"  style="width: 300px;height: 300px;">
+		<div class="col-xs-5">
+			<select name="from" id="showprojects" class="form-control" size="13" style="width: 280px;height: 300px;" onchange="projectChange()">
+				<!-- 
+				<option value="1">C++</option>
+				<option value="2">C#</option>
+				 -->
+			</select>
+		</div>
+	</div>
+	
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thpower.scada.mapper.THPUPRelationMapper">
+
+	<select id="getRelationsByProId" parameterType="long" resultType="THPUPRelation">
+		select * from sys_uprelations 
+		where proId = #{proId};
+	</select>
+	
+	<select id="delRelationsByProId" parameterType="long">
+		delete from sys_uprelations 
+		where proId = #{proId};
+	</select>
+
+	<select id="addRelationsByProId" parameterType="long" resultType="THPUPRelation">
+		select * from sys_uprelations 
+		where proId = #{proId};
+	</select>	
+		
+	<select id="select" parameterType="long" resultType="THPUPRelation">
+		select * from sys_uprelations 
+		where relId = #{relId};
+	</select>
+	
+	<insert id="insert" parameterType="THPUPRelation"  useGeneratedKeys="true" keyProperty="relId" >
+	     insert into sys_uprelations (userId, proId) 
+	     values (#{userId}, #{proId});
+    </insert>
+    
+    <update id="update" parameterType="THPUPRelation">
+           update sys_uprelations 
+           set userId=#{userId}, proId=#{proId}
+           where relId=#{relId};
+    </update>    
+    
+	<delete  id="delete" parameterType="long">
+		delete from sys_uprelations
+		where relId = #{relId};
+	</delete >
+            
+</mapper>

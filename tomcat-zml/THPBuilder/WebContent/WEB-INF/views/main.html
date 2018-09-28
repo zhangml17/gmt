@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<title>THPower Cloud</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="power system,online,diagram,power">
+	<link rel="shortcut icon" href="main/images/favicon.ico">
+		
+	<link href="main/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="main/mstyles/style.css" rel="stylesheet">
+	<link href="main/mstyles/main.css" rel="stylesheet">
+	<link href="main/mstyles/mainpage.css" rel="stylesheet">	
+	<link href="main/istyles/animate.css" rel="stylesheet">
+	<link href="main/istyles/flexslider.css" rel="stylesheet">
+	<link href="main/autohtml/css/icomoon.css" rel="stylesheet">
+	<link href="main/istyles/style.css" rel="stylesheet">
+	<link href="main/istyles/public.css" rel="stylesheet">
+	<link href="main/istyles/index.css" rel="stylesheet">
+	<link href="main/istyles/mainpage.css" rel="stylesheet">
+	<link href="main/istyles/mainpagestyle.css" rel="stylesheet">
+	<link href="main/tooltipster/tooltipster-sideTip-shadow.min.css" rel="stylesheet">
+	<link href="main/tooltipster/tooltipster.bundle.css" rel="stylesheet">
+	<link href="main/toastr/toastr.css" rel="stylesheet">
+    <link rel="stylesheet" href="main/font-awesome/css/font-awesome.min.css">
+	
+	<!-- 使用 jQuery.i18n.properties 实现 Web 前端的国际化  -->
+	<script type="text/javascript" src="main/js/jsi18n.js"></script>
+		
+	<script type="text/javascript" src="main/js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="main/js/lz-string.js"></script>
+	<script type="text/javascript" src="main/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="main/tooltipster/tooltipster.bundle.min.js"></script>
+	<script type="text/javascript" src="main/toastr/toastr.min.js"></script>
+	<script type="text/javascript" src="main/js/jquery.form.js"></script>
+	<script type="text/javascript" src="main/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="main/js/jquery.waypoints.min.js"></script>
+	<script type="text/javascript" src="main/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="main/js/modernizr-2.6.2.min.js"></script>
+	<script type="text/javascript" src="main/js/Particleground.js"></script>
+	<script type="text/javascript" src="main/js/reveal.js"></script>
+	
+	<style>
+		html,body
+		{
+		 overflow-x: hidden;
+		}
+		
+		.abc {
+			width: 15%;
+		}
+		
+		.navbar-logo {
+			display: block;
+			background: url(main/images/logo.png) no-repeat 15px center;
+		}
+		
+		@media screen and (min-width: 1001px) {
+			.abc {
+				width: 15%
+			}
+			.mobile-menu {
+				display: none;
+			}
+		}
+		
+		@media screen and (max-width: 1000px) {
+			.abc {
+				width: 45%;
+			}
+			#fnav {
+				display: none;
+			}
+			#user_menu {
+				display: none;
+			}
+			.mobile-menu {
+				display: block;
+			}
+		}
+		
+		#fnav li a {
+			font-size: 18px;
+			font-weight: inherit;
+			color: rgba(0, 0, 0, 0.7);
+			-webkit-transition: 0.5s;
+			-o-transition: 0.5s;
+			transition: 0.5s;
+		}
+		
+		.navbar {
+			height: 73px;
+			border: none;
+			box-shadow: 0px 2px 8px rgba(80, 103, 132, 0.5);
+		}
+		
+		.personal-box img {
+			margin-left: 20px;
+			margin-right: 13px;
+			border-radius: 20px;
+		}
+		
+		#user_menu>li>a>span.glyphicon.glyphicon-menu-down {
+			color: #44b9ef;
+		}
+		
+		#fnav li {
+			letter-spacing: 1px;
+			border-bottom: 3px solid transparent;
+			transition: border-bottom ease 0.5s
+		}
+		
+		#fnav li:hover {
+			border-bottom: 3px solid #119DFF;
+		}
+		
+		.navbar-toggle .icon-bar {
+			background-color: #212121;
+		}
+		
+		.navbar-toggle {
+			margin-top: 22px;
+		}
+		
+		.navbar {
+			z-index: 201
+		}
+		</style>
+		
+		
+		<style type="text/css">
+		footer {
+			clear: both;
+			padding: 1em 0px 0px 0px !important;
+			text-align: center;
+			position: relative;
+			z-index: 33;
+			background: #ebf0f8;
+		}
+		
+		.footercontainer {
+			min-height: 50px;
+			width: 1300px;
+			background: #ebf0f8;
+		}
+		
+		.copyright.row {
+			padding-top: 0px;
+			margin-top: 0px;
+		}
+		
+		footer a {
+			color: #9e9e9e;
+			transition: 0.5s;
+		}
+		
+		footer a:hover {
+			color: #000;
+		}
+		
+		footer a:not (:last-child ){
+			margin-right: 25px;
+		}
+		
+		@media screen and (max-width: 768px) {
+			.footercontainer {
+				width: 100%;
+			}
+			footer {
+				font-size: 14px !important;
+			}
+		}
+	</style>
+<!-- 
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+        $('#lang_cn').click(function(){
+            $.get('/setlang?lang=cn',function(data){
+                 window.location.reload();
+            });
+        });
+        $('#lang_en').click(function(){
+            $.get('/setlang?lang=en',function(data){
+                 window.location.reload();
+            });
+        });
+    });
+	    
+</script>
+-->
+
+</head>
+<body>
+	<!-- top -->
+	<nav class="navbar">
+		<div class="container fz-container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header abc" style="float: left;">
+				<a class="navbar-brand navbar-logo" href="http://www.thpower.com"  style="width: 100%">Brand</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul id="to_login_div"
+					class="nav navbar-nav fz-navbar-nav pull-right"
+					style="margin: 0px; display: none;">
+					<li class=""><a href="to_login">登录</a></li>
+					<li class=""><a href="to_register">注册</a></li>
+				</ul>
+				<ul id="user_menu" class="nav navbar-nav navbar-right"
+					style="margin-left: -21px; position: relative;">
+					<li class="dropdown">
+						<a href="javascript:void(0)" class="dropdown-toggle personal-box" data-toggle="dropdown"	role="button" aria-haspopup="true" aria-expanded="false">
+							<span	id="username_span">wulouvre</span> 
+							<img width="40" height="40" id="head_portrait_a"  src="main/images/person-avatar.png" alt="">
+							<span class="glyphicon glyphicon-menu-down"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="my-item">我的首页</a></li>
+							<!-- <li><a href="editor.html" class="my-work">我的工作台</a></li> -->
+							<li><a href="to_logout" class="my-quit">退出</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="signform loginanimate" id="createform" style="display: none;">
+	    <div class="signclose">
+	        <img src="main/istyles/invalid-circle-close-delete-cross-x-incorrect-icon.svg" width="35px" height="35px">
+	    </div>
+	    <!-- 
+	    	<form id="create_form" action="createProject" method="post"  onsubmit="return saveForm()">
+	    	</form>
+	    -->
+	    	<div id="create_form" >
+		        <div class="creatediv" style=" margin-top: 80px;">
+		            <input id="pname" class="signinput" type="text" placeholder="工程名称" name="proname">
+		
+		        </div>
+		        <div class="creatediv" style="display: none;">
+		            <input id="pdesc" class="signinput" type="text" placeholder="工程描述" name="prodescription">
+		        </div>
+		        <div class="creatediv">
+		            <select id="ptype" name="protype" class="signinput">
+					  <option value ="grid">城乡配电网</option>
+					  <option value ="incremental">增量配电网</option>
+					  <option value ="park">园区电网</option>
+					  <option value="enterprise">企业电网</option>
+					</select>
+		        </div>
+		        <div class="creatediv">
+		        <div class="postdiv">
+		            <button id="createBtn" >创 建</button>
+		        </div>
+		        </div>
+		        <div class="creatediv">
+		            <span style="color:red" id="nameerrors"></span>        
+		        </div>
+	       </div>
+	</div>
+
+	<div class="page_content" style="padding-top: 73px">
+		<div id="block-main" class="container" style="min-height: 690px">
+			<div class="layouts-sidebar">
+				<div id="block-banner-right" class="">
+					<a href="#"
+						class="tab active"><i class="icon"></i>欢迎使用Web Scada System </a> <a
+						href="editor.html">
+						<!-- <div class="btn btn-main" style="float: right;">进入工作台</div>  -->
+					</a>
+				</div>			
+				<!-- right main -->
+				<div id="area-main-right">
+					<div id="area-cont-right">						
+						<div class="block" id="recent">
+							<div class="banner">							
+								<p >	
+								<!-- 	class="tab fixed"						
+								<a href="javascript:void(0)"
+										onclick="mgrproject();" class="tab more" id="mgrlink" ><i
+										class="glyphicon glyphicon-wrench"></i>管理</a>
+											
+								<a href="javascript:void(0)"
+										onclick="expproject();" class="tab more" id="explink" ><i
+										class="glyphicon glyphicon-export"></i>导出</a>
+								<a href="javascript:void(0)"
+										onclick="impproject();" class="tab more" id="implink" ><i
+										class="glyphicon glyphicon-import"></i>导入</a>
+								-->
+								<a href="javascript:void(0)"
+										onclick="newproject();" class="tab more" id="newlink" ><i
+										class="glyphicon glyphicon-plus-sign"></i>新建</a>
+								</p>
+							</div>
+							<ul class="block_content">
+								<!-- 
+								<li><i class="glyphicon glyphicon-file"></i>最近打开的工程：<a href="editor.html?id=747">新建工程</a></li>
+								-->
+							</ul>			
+						</div>	
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container footercontainer">
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small><a href="http://www.miitbeian.gov.cn/">Copyright © 2017 by THPOWER 京ICP备16001841号-1</a></small>
+					</p>
+					<p>
+						<small>Powered by <a href="http://www.thpower.com/">北京国科恒通科技股份有限公司</a></small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	
+<script type="text/javascript" src="main/js/mainpage_init.js"></script>
+	
+	
+<script type="text/javascript">
+
+$(document).ready(function() 
+{	
+	$('#list-guide-left > div:nth-child(3) > div.banner > p').click(function (e) {
+        if($(this).data('animating')==1){
+            return;
+        }else {
+            $(this).data('animating',1);
+            var content = $('#list-guide-left > div.part-guide-left.subcontext');
+            if(content.height() != 0){
+                content.data('height',content.height());
+                content.animate({height:"0px"},function(){content.hide();});
+                $(this).data('animating',0);
+            }else {
+                var height_ = content.data('height');
+                content.animate({height:height_});
+                content.show();
+                $(this).data('animating',0);
+            }
+        }
+
+    });
+
+	if($('#head_portrait_img').attr('src') == 'main/images/person-avatar.png'){
+        textToImg($('#block-user-left > div.d > a').text(),$('#head_portrait_img'));
+    }
+	    
+});
+
+
+
+
+function textToImg(uname, jq) {
+    //             var uname = 'Joy';
+    var name = uname.charAt(0).toUpperCase();
+    var fontSize = 60;
+    var fontWeight = 'bold';
+
+    var canvas = document.createElement('canvas');
+    //             var img1 = document.getElementById('headImg');
+    canvas.width = 120;
+    canvas.height = 120;
+    var context = canvas.getContext('2d');
+    context.fillStyle = '#d0e5f8';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#605CA8';
+    context.font = fontWeight + ' ' + fontSize + 'px sans-serif';
+    context.textAlign = 'center';
+    context.textBaseline = "middle";
+    context.fillText(name, fontSize, fontSize);
+    //             $("img[name='head_portrait_a']").attr('src',canvas.toDataURL("image/png"));
+    jq.attr('src', canvas.toDataURL("image/png"));
+};
+
+</script>
+	
+<script type="text/javascript">
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thpower.scada.mapper.THPStatusMapper">
+
+	<select id="getAllStatus" resultType="java.util.HashMap">
+		select p.userId, userName, userEmail, userOnline, userLoginIP, userLoginTime, userUpdateTime
+		from sys_users p 
+		Left JOIN sys_status s
+		ON p.userId =s.userId
+	</select>
+	
+    <update id="updateOnline" parameterType="THPStatus">
+            update sys_status 
+            set userOnline=#{userOnline} ,userLoginIP=#{userLoginIP} ,userLoginTime=#{userLoginTime} ,userUpdateTime=#{userUpdateTime} 
+            where userId=#{userId};
+    </update>   
+        
+    <update id="updateOffline" parameterType="long">
+            update sys_status 
+            set userOnline=0, userLoginIP='', userLoginTime='', userUpdateTime=''
+            where userId=#{userId};
+    </update>      
+    
+    <update id="replaceintoRow" parameterType="THPStatus">
+            replace into sys_status (userId, userOnline,  userLoginIP, userLoginTime, userUpdateTime) 
+	        values (#{userId}, #{userOnline},  #{userLoginIP},  #{userLoginTime}, #{userUpdateTime});
+    </update>    
+	
+	<select id="select" parameterType="long" resultType="THPStatus">
+		select * from sys_status 
+		where userId = #{userId};
+	</select>
+	
+	<insert id="insert" parameterType="THPStatus" >
+	     insert into sys_status (userId, userOnline,  userLoginIP, userLoginTime, userUpdateTime) 
+	     values (#{userId}, #{userOnline},  #{userLoginIP},  #{userLoginTime}, #{userUpdateTime});
+    </insert>
+    
+    <update id="update" parameterType="THPStatus">
+            update sys_status 
+            set userOnline=#{userOnline} ,userLoginIP=#{userLoginIP} ,userLoginTime=#{userLoginTime} ,userUpdateTime=#{userUpdateTime} 
+            where userId=#{userId};
+    </update>    
+    
+	<delete  id="delete" parameterType="long">
+		delete from sys_status 
+		where userId = #{userId};
+	</delete >
+            
+</mapper>

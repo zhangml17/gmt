@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="expires" content="0">
+    <title>THPower Cloud</title>
+    <link rel="stylesheet" href="main/sheet/css/ui-bootstrap/jquery-ui.custom.css">
+    <link rel="stylesheet" href="main/sheet/css/demo-style.css">
+    <link rel="stylesheet" href="main/sheet/css/sheet-style.css">
+    <link rel="stylesheet" href="main/handsontable/handsontable.full.css">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="main/printarea/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+    <link rel="stylesheet" href="main/printarea/PrintArea.css" />
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-datepicker.css" />
+    
+    <script type="text/javascript" src="main/sheet/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="main/sheet/js/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="main/sheet/js/numeral.sv-se.js"></script>
+    <script type="text/javascript" src="main/handsontable/handsontable.full.js"></script>
+    <script type="text/javascript" src="main/handsontable/languages/zh-CN.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap-colorpicker.min.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="main/sheet/js/report.js"></script>
+    <script type="text/javascript" src="main/printarea/jquery-ui-1.10.4.custom.js"></script>
+    <script type="text/JavaScript" src="main/printarea/jquery.PrintArea.js"> </script>
+    <script type="text/JavaScript" src="main/sheet/SimuData.js"> </script>
+    <script type="text/JavaScript" src="main/sheet/THPReport.js"> </script>
+    <!-- <script type="text/JavaScript" src="main/mock/mock.js"> </script>  -->
+    <script type="text/JavaScript" src="main/bootstrap/js/bootstrap-datepicker.js"> </script>
+    <script type="text/JavaScript" src="main/numeral/numeral.min.js"> </script>
+    <script type="text/javascript" src="static/app/app.js"></script>
+    
+    <style>
+	.loading {
+	    width: 300px;
+	    height: 56px;
+	    position: absolute;
+	    top: 30%;
+	    left: 30%;
+	    line-height: 56px;
+	    color: #fff;
+	    padding-left: 60px;
+	    font-size: 15px;
+	    background: #000 url(./main/sheet/images/loading.gif) no-repeat 10px 50%;
+	    opacity: 0.7;
+	    z-index: 9999;
+	    -moz-border-radius: 20px;
+	    -webkit-border-radius: 20px;
+	    border-radius: 20px;
+	    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+	}
+	</style>
+
+    <!-- bootstrap 模态框日期控件datepicker被遮住问题 -->    
+    <script>
+	    function TestLoginSource()
+	    {    		
+	    	var urlf = document.referrer;
+	    	
+	    	if(urlf=="" || urlf.indexOf("index.html") == -1)
+	    	{
+	    		window.location='index.html';   	
+	    		return "";
+	    	}    		
+	    }
+	    
+		//login
+		TestLoginSource();
+    </script>
+
+</head>
+<body>
+<div id="tabs" style="position: absolute; vertical-align: middle;">
+    <div id="tabs-header" style="position: relative;">
+        <div style="float: left;">
+            <label style="color: #337ab7;">报表类型：</label>
+            <select id="myTypes" class="selectpicker"></select>
+            <label style="color: #337ab7;">选择报表：</label>
+            <select id="mySheets" ></select>
+            <label style="color: #337ab7;">选择时间：</label>
+		    <input type='text' class='form-control selectData selectdate' style="width:200px;" id='date' name='date'>
+		    <input type='text' class='form-control selectData selectmonth' style="width:200px;" id='month' name='month'>
+		    <input type='text' class='form-control selectData selectyear' style="width:200px;" id='year' name='year'>
+		    
+            <input type="button" class="btn btn-success btn-sm" style="width:100px;height:30px;" onclick="viewSheet();" value="查  看"/>
+            <input type="button" class="btn btn-primary btn-sm" style="width:100px;height:30px;" onclick="printSheet();" value="打  印"/>
+            <input type="button" class="btn btn-primary btn-sm" style="width:100px;height:30px;" onclick="exportSheet();" value="导  出"/>
+            <!--     -->
+        </div>
+    </div>
+    
+    <div id="tabs-body" style="clear:both;">
+        <div id="dataTable"></div>
+        <div id="myconsole"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="myOK" tabindex="-1" role="dialog" aria-labelledby="myOKLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myOKLabel">成功</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txt_key">成功！</label>
+                    <!--<input type="text" name="txt_key" class="form-control" id="txt_key" placeholder="编码">-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myProgressbar" class="modal fade" data-keyboard="false"
+            data-backdrop="static" data-role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="loading" class="loading">努力加载中......</div>
+</div>
+        
+        
+<script>
+
+$(function(){
+    
+	$.fn.datepicker.dates['cn'] = {   
+		//切换为中文显示
+		days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+		daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
+		daysMin: ["日", "一", "二", "三", "四", "五", "六", "七"],
+		//months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+		//monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+		months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+		monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+		today: "今天",
+		clear: "清除"
+	};
+	
+	//startView: 2, maxViewMode: 1,minViewMode:1,这三个参数，
+	//第一个表示起始选择范围，0为日，1为月，2为年，第二个参数表示最大选择范围，第三个表示最小选择范围。
+	//数字意义同第一个参数。
+				
+	 $('.selectdate').datepicker({
+		autoclose: true,          //自动关闭
+		beforeShowDay: $.noop,    //在显示日期之前调用的函数
+		calendarWeeks: false,     //是否显示今年是第几周
+		clearBtn: false,          //显示清除按钮
+		daysOfWeekDisabled: [],   //星期几不可选
+		endDate: Infinity,        //日历结束日期
+		forceParse: true,         //是否强制转换不符合格式的字符串
+		format: 'yyyy-mm-dd',     //日期格式
+		keyboardNavigation: true, //是否显示箭头导航
+		language: 'cn',           //语言
+		orientation: "auto",      //方向
+		rtl: false,
+		startDate: -Infinity,     //日历开始日期
+		startView: 0,             //开始显示
+		maxViewMode: 0,
+		minViewMode: 0,
+		todayBtn: true,          //今天按钮
+		todayHighlight: true,    //今天高亮
+		weekStart: 0             //星期几是开始		
+	});//.on("changeDate", gotoDate);
+	 
+	 $('.selectmonth').datepicker({
+			autoclose: true,          //自动关闭
+			beforeShowDay: $.noop,    //在显示日期之前调用的函数
+			calendarWeeks: false,     //是否显示今年是第几周
+			clearBtn: false,          //显示清除按钮
+			daysOfWeekDisabled: [],   //星期几不可选
+			endDate: Infinity,        //日历结束日期
+			forceParse: true,         //是否强制转换不符合格式的字符串
+			format: 'yyyy-mm',     //日期格式
+			keyboardNavigation: true, //是否显示箭头导航
+			language: 'cn',           //语言
+			orientation: "auto",      //方向
+			rtl: false,
+			startDate: -Infinity,     //日历开始日期
+			startView: 1,             //开始显示
+			maxViewMode: 2,
+			minViewMode: 1,
+			todayBtn: true,          //今天按钮
+			todayHighlight: true,    //今天高亮
+			weekStart: 0              //星期几是开始
+		});//.on("changeDate", gotoDate);
+	 
+	 
+	 $('.selectyear').datepicker({
+			autoclose: true,          //自动关闭
+			beforeShowDay: $.noop,    //在显示日期之前调用的函数
+			calendarWeeks: false,     //是否显示今年是第几周
+			clearBtn: false,          //显示清除按钮
+			daysOfWeekDisabled: [],   //星期几不可选
+			endDate: Infinity,        //日历结束日期
+			forceParse: true,         //是否强制转换不符合格式的字符串
+			format: 'yyyy',     //日期格式
+			keyboardNavigation: true, //是否显示箭头导航
+			language: 'cn',           //语言
+			orientation: "auto",      //方向
+			rtl: false,
+			startDate: -Infinity,     //日历开始日期
+			startView: 2,             //开始显示,0为日，1为月，2为年
+			maxViewMode: 2,
+			minViewMode: 2,
+			todayBtn: true,          //今天按钮
+			todayHighlight: true,    //今天高亮
+			weekStart: 0              //星期几是开始			
+		}); //.on("changeDate", gotoDate);
+	 
+	//$(".datepicker").css("z-index",1000);
+	$(".selectdate").val(new Date(new Date()-24*60*60*1000).Format("yyyy-MM-dd"));
+	$(".selectmonth").val(new Date().Format("yyyy-MM"));
+	$(".selectyear").val(new Date().Format("yyyy"));
+	
+	$(".selectdate").show();
+	$(".selectmonth").hide();
+	$(".selectyear").hide();	
+	
+});
+
+
+</script>
+
+</body>
+</html>

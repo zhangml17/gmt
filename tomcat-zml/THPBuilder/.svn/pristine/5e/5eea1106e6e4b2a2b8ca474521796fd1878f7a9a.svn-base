@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<title>THPower Cloud</title>
+    <link rel="shortcut icon" href="static/icons/favicon.ico">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="main/bootstrap/css/bootstrap-select.min.css" >
+    <link rel="stylesheet" href="main/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main/layui/css/layui.css">
+    <link rel="stylesheet" href="main/vstyles/style2.css"/>
+    <link rel="stylesheet" href="static/styles/GModel.css">
+
+    <script type="text/javascript" src="main/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="main/bootstrap/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="main/js/viewpage.js"></script>
+    <script type="text/javascript" src="main/numeral/numeral.min.js"></script>
+    <script type="text/javascript" src="main/app/thpower-public.js"></script>
+    <script type="text/javascript" src="main/app/thpower-utils.js"></script>
+    
+	<style>
+		/* navbar */
+		.navbar-default {
+		 background-color: #344357;
+		 border-color: #E7E7E7;
+		}
+		/* title */
+		.navbar-default .navbar-brand {
+		 color: #777;
+		}
+		.navbar-default .navbar-brand:hover,
+		.navbar-default .navbar-brand:focus {
+		 color: #5E5E5E;
+		}
+		/* link */
+		.navbar-default .navbar-nav > li > a {
+		 color: #777;
+		}
+		.navbar-default .navbar-nav > li > a:hover,
+		.navbar-default .navbar-nav > li > a:focus {
+		 color: #333;
+		}
+		.navbar-default .navbar-nav > .active > a, 
+		.navbar-default .navbar-nav > .active > a:hover, 
+		.navbar-default .navbar-nav > .active > a:focus {
+		 color: #555;
+		 background-color: #E7E7E7;
+		}
+		.navbar-default .navbar-nav > .open > a, 
+		.navbar-default .navbar-nav > .open > a:hover, 
+		.navbar-default .navbar-nav > .open > a:focus {
+		 color: #555;
+		 background-color: #D5D5D5;
+		}
+		/* caret */
+		.navbar-default .navbar-nav > .dropdown > a .caret {
+		 border-top-color: #777;
+		 border-bottom-color: #777;
+		}
+		.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+		.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+		 border-top-color: #333;
+		 border-bottom-color: #333;
+		}
+		.navbar-default .navbar-nav > .open > a .caret, 
+		.navbar-default .navbar-nav > .open > a:hover .caret, 
+		.navbar-default .navbar-nav > .open > a:focus .caret {
+		 border-top-color: #555;
+		 border-bottom-color: #555;
+		}
+		/* mobile version */
+		.navbar-default .navbar-toggle {
+		 border-color: #DDD;
+		}
+		.navbar-default .navbar-toggle:hover,
+		.navbar-default .navbar-toggle:focus {
+		 background-color: #DDD;
+		}
+		.navbar-default .navbar-toggle .icon-bar {
+		 background-color: #CCC;
+		}
+		@media (max-width: 767px) {
+		 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+		 color: #777;
+		 }
+		 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+		 .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		 color: #333;
+		 }
+		}
+		.nav
+		{
+		  /*opacity: 0.5;*/		
+		}
+	
+	</style>
+	
+	
+	<script type="text/javascript">       
+ 	  	var urlParams = (function (url) {
+	        var result = new Object();
+	        var idx = url.lastIndexOf('?');
+	
+	        if (idx > 0) {
+	            var params = url.substring(idx + 1).split('&');
+	
+	            for (var i = 0; i < params.length; i++) {
+	                idx = params[i].indexOf('=');
+	
+	                if (idx > 0) {
+	                    result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+	                }
+	            }
+	        }
+	
+	        return result;
+	    })(window.location.href);
+ 	  	
+ 	  	var RESOURCES_PATH = 'static/resources';
+	    var STENCIL_PATH = 'static/stencils';
+	    var IMAGE_PATH = 'static/images';
+	    var STYLE_PATH = 'static/editor';
+	    var CSS_PATH = 'static/styles';
+	    
+	    mxBasePath = 'static/mxgraph';
+		xmlBaseContent='';
+    
+	</script>
+	
+	<!-- Loads and initializes the library -->
+	<script type="text/javascript" src="static/mxgraph/js/mxClient.js"></script>
+	<script type="text/javascript" src="static/thpower/main-editor.js"></script>
+	<script type="text/javascript" src="static/sanitizer/sanitizer.min.js"></script>
+	<script type="text/javascript" src="static/js/Graph.js"></script>
+	<script type="text/javascript" src="static/js/Shapes.js"></script>	
+	<script type="text/javascript" src="static/js/echarts.js"></script>
+	<script type="text/javascript" src="static/js/Time.js"></script>
+	<script type="text/javascript" src="static/app/app.js"></script>	
+			
+	<script type="text/javascript" src="static/js/GModel.js"></script>	
+    <script type="text/javascript" src="static/js/GEvent.js"></script>
+    <script type="text/javascript" src="main/js/viewer.js"></script>
+    <script type="text/javascript" src="main/js/charts.js"></script>
+    <script type="text/javascript" src="main/js/toolbar.js"></script>
+    <script type="text/javascript" src="static/js/CreateTable.js"></script>
+    <script type="text/javascript" src="static/js/Viewchart.js"></script>
+	
+</head>
+<body style="width: 100%;height: 100%;">
+	<div style="background:url(main/images/topbg.png) repeat-x;display:flex;display: -webkit-flex;align-items:center;">
+		<a href="javascript:void(0)" target="_parent"><img src="main/images/syslogo.png" title="智慧能源实时监控系统" /></a>
+		<!--  
+		<input type="button" value="运行" onclick="run()" style="margin-left:10px; height:30px;width:80px;"/>
+		<input type="button" value="编辑" onclick="edit()" style="margin-left:10px; height:30px;width:80px;"/>
+		-->
+		<input type="button" value="查看" onclick="ViewXML()" style="margin-left:10px; height:30px;width:80px;"/>		
+		<input id="btnTimer" type="button" value="刷新" onclick="timerUpdate()" style="margin-left:10px; height:30px;width:80px;"/>		
+	</div>
+	<!--<input type="button" value="实时数据刷新" onclick="updateValue(updateids,mygraph)"/>
+	<input type="button" value="刷新" onclick="refresh()"/>-->
+	<!-- Creates a container for the graph with a grid wallpaper -->
+	<div id="graphContainer" style="position:relative;overflow:hidden;width:100%;height:100%;cursor:default;">
+	</div>
+	<div class="navbar-default navbar-fixed-bottom" style="background-color: transparent;">
+        <div id="displayContainer" >
+        	<!--nav-pills，nav-tabs，nav-stacked :改变选项卡的样式  class="container-fluid"  -->
+        	<div class="row" style="padding-right: 50px;">
+	        	<ul class="nav nav-pills navbar-right" >
+		            <li class="active"><a href="javascript:void(0);" onclick="DisplayClick(1)">报警</a></li>
+		           <!-- <li><a href="javascript:void(0);" onclick="DisplayClick(0)">隐藏</a> </li> --> 
+	            </ul>  
+            </div>             
+        	<div class="row">
+				<iframe id="alarmContainer" frameborder="0" scrolling="no" style="display: none; width: 100%;" ></iframe>
+			</div>
+        </div>
+	</div>
+	
+	<script type="text/javascript" src="static/js/GModel.js"></script>
+	<script type="text/javascript">	
+
+		var menuid = GetQueryString("menuid");
+		
+		var showalarm = false;
+
+	    function DisplayClick(bshow) {
+	    	showalarm = !showalarm;
+	    	if (showalarm)
+    		{
+				$("#displayContainer").animate({height:"300px"},500);
+				$("#alarmContainer").show();
+		        $("#alarmContainer").attr("src", "test.html");
+				$("#alarmContainer").css({height:"264px"});
+    		}else
+   			{
+				$("#displayContainer").animate({height:"10px"},500);
+				$("#alarmContainer").hide();
+		        $("#alarmContainer").attr("src", "");
+
+   			}
+	    	
+			//alert("hello world");
+	    }   
+				
+		
+		if (menuid != null && menuid != "")
+		{
+			$.get(
+			        '/THPBuilder/getMenu',
+			        {menuid: menuid},
+			        function(response, status, jxhr){         	
+			            if( status == "success" )
+			            {  
+			            	menuData = response.menu;
+			            	
+			            	//如果没数据，调用模拟数据
+			            	if (menuData == null || menuData =='')
+		            		{
+								xmlBaseContent='';
+		            			
+		            		}else
+	            			{
+		            			xmlBaseContent=menuData.menuContent;
+	            			}
+			            	
+			            	main(document.getElementById('graphContainer'));		            	
+			            	
+			            }else{
+			                alert("load menu error!");
+			            }			            
+			        },
+			        'json'
+			    );		
+		
+		}
+		
+
+	
+	</script>
+
+
+</body>	
+</html>

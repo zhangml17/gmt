@@ -1,0 +1,74 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/***
+ * 
+ * http://www..com
+ * e-mail: admin@.com
+ overflow:hidden
+ */
+*{font-size:9pt;border:0;margin:0;padding:0;}
+html, body{font-family:'微软雅黑'; margin:0px;padding:0px;} 
+
+img{border:0;}
+dl,dt,dd,span{margin:0;padding:0;display:block;}
+
+/*div*/
+.header{height:60px;border:0px solid #ccc;margin:0px;padding:0px;}
+
+.mainer{float:left;position: absolute; top: 60px;margin:0px;border:0px solid #ccc;}
+
+.sidebar{display: inline;float:left;margin-top:0px;border:0px solid #ccc;width:220px;min-height:800px;padding:0px;}
+
+.graphContainer{display: inline;float:left;width:calc(100% - 250px);margin-top:0px;margin-left:0px;border:0px solid #ccc;padding:0px;}
+
+/*header*/
+.topleft{height:60px;background:url(../images/topline.png) no-repeat;float:left; width:220px;  }
+.topleft img{margin-top:0px;margin-left:10px;}
+
+.daohang {display:block;float:left;height:60px;margin-top:0px;margin-left:0px;min-width:800px;overflow:hidden;overflow-y:auto;border: 0px solid #bdd0db;margin: auto; }
+
+
+.topright{height:60px;float:right;}
+
+.user{height:30px;background:url(../images/ub1.png) repeat-x;clear:both;margin-top:10px;float:right; margin-right:12px;border-radius:30px; behavior:url(js/pie.htc); white-space:nowrap;position:relative;}
+.user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 10px; line-height:30px; font-size:14px;color:#b8ceda; padding-left:20px; padding-left:35px;}
+.user b{display:inline-block;width:20px;height:18px; background:url(../images/msg.png);text-align:center; font-weight:normal; color:#fff;font-size:14px;margin-right:13px; margin-top:7px; line-height:18px;}
+.user i{display:inline-block;margin-right:5px;font-style:normal;line-height:30px; font-size:14px;color:#b8ceda;}
+
+
+/*left*/
+.lefttop{height:40px;color:#1690d9;font-size:14px;font-weight:700;line-height:40px; background:url(../images/righttop.gif) repeat-x;}
+.lefttop span{margin-left:20px; float:left;}
+
+.ul-box{
+    height: 380px;
+    overflow-y:auto;margin-top: 20px;
+}
+
+.ul-table{
+    height:  380px;
+    border-top:1px;list-style:none; padding:0px; margin:0px; width:100%;height:20px; line-height:20px;
+}
+.ul-table .litop{
+	border-top: 1px solid #ccc;
+    font-weight: bold;
+    background: #ccc;
+}
+.ul-table li{
+    height: 35px;
+    line-height: 35px;
+    border-bottom:1px #ccc solid;
+}
+.ul-table li .span-left{
+    float: left;
+    width: 200px;
+    text-align: center;;
+    display:block;
+}
+.ul-table li .span-right{
+    float: left;
+    width: 300px;
+    text-align: left;;
+    display:block;
+    border-left: 1px solid #ccc;
+}

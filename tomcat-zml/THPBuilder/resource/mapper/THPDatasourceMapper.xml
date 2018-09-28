@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thpower.scada.mapper.THPDatasourceMapper">
+
+	<select id="getAllDatasources" resultType="THPDatasource">
+		select * from sys_datasources;
+	</select>
+	
+	<select id="getDatasourcesByType" parameterType="String" resultType="THPDatasource">
+		select * from sys_datasources
+		where dsType=#{dsType};
+	</select>	
+	
+	<select id="getDatasourceByCode" parameterType="String" resultType="THPDatasource">
+		select * from sys_datasources
+		where dsCode=#{dsCode};
+	</select>	
+	
+	<select id="getDatasourceUrlById" parameterType="long" resultType="String">
+		select dsUrl from sys_datasources
+		where dsId=#{dsId};
+	</select>
+	
+	<select id="getDatasourceUrlByCode" parameterType="String" resultType="String">
+		select dsUrl from sys_datasources
+		where dsCode=#{dsCode};
+	</select>		
+	
+	<select id="getDatasourceTypes" resultType="String">
+		select distinct dsType from sys_datasources;
+	</select>
+	
+	
+	<select id="select" parameterType="long" resultType="THPDatasource">
+		select * from sys_datasources 
+		where dsId = #{dsId};
+	</select>
+
+	<insert id="insert" parameterType="THPDatasource" useGeneratedKeys="true" keyProperty="dsId" >
+		insert into sys_datasources (proId, dsCode, dsType, dsName, dsDescription, dsUrl, dsConnection, dsIsValid, dsNote, dsCreateTime, dsModifyTime)
+		values (#{proId}, #{dsCode}, #{dsType}, #{dsName}, #{dsDescription}, #{dsUrl}, #{dsConnection}, #{dsIsValid}, #{dsNote}, #{dsCreateTime}, #{dsModifyTime});
+	</insert>
+
+	<update id="update" parameterType="THPDatasource">
+		update sys_datasources 
+		set proId=#{proId}, dsCode=#{dsCode}, dsType=#{dsType}, dsName=#{dsName}, dsDescription=#{dsDescription}, dsUrl=#{dsUrl}, dsConnection=#{dsConnection}, dsIsValid=#{dsIsValid}, dsNote=#{dsNote}, dsCreateTime=#{dsCreateTime}, dsModifyTime=#{dsModifyTime}
+		where dsId=#{dsId};
+	</update>
+		
+	<delete  id="delete" parameterType="long">
+		delete from sys_datasources 
+		where dsId = #{dsId};
+	</delete >	
+
+</mapper>

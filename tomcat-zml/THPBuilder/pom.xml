@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>THPower</groupId>
+  <artifactId>THPBuilder</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <properties>  
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+  </properties>  
+  
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>resource</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <warSourceDirectory>WebContent</warSourceDirectory>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+	  
+	  <!-- 1、maven-compiler-plugin插件 -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+	  <encoding>UTF-8</encoding>
+  	  <compilerArguments>
+              <extdirs>${basedir}/WebContent/WEB-INF/lib</extdirs> 
+                  <!-- <extdirs>${basedir}/src/main/webapp/WEB-INF/lib</extdirs>-->
+          </compilerArguments>
+        </configuration>
+      </plugin>
+	  
+	  <!-- 2、tomcat7-maven-plugin插件 -->
+	  <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+              <url>http://192.168.100.42:18080/manager/text</url>
+              <username>thpower</username>
+              <password>thpower</password>
+              <path>/webapp</path>
+              <server>tomcat7</server>
+              <path>/${project.artifactId}</path>
+              <update>true</update>
+          </configuration>
+	  </plugin>
+
+    </plugins>
+  </build>
+</project>

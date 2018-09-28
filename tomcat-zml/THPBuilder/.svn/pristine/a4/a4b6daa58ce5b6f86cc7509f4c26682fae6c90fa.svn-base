@@ -1,0 +1,115 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<title>THPower Cloud</title>
+	<link href="../static/easyui/themes/icon.css" rel="stylesheet" />
+	<link href="../main/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../static/easyui/themes/default/easyui.css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="../main/js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="../main/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../main/js/multiselect.js"></script>
+	<script type="text/javascript" src="../main/easyui/jquery.easyui.min.js"></script>
+	
+	<script type="text/javascript" src="../main/public/thpowerutils.js"></script>
+		
+	<script type="text/javascript">
+
+	//html打开时执行查询参数类别的信息
+	$(function() {	
+		
+		var userid = urlParams['userid'];
+    	
+    	if(userid==null)
+   		{
+    		//window.location='index.html';
+   		}
+			
+			/*
+			$('.js-multiselect').multiselect({
+				right: '#js_multiselect_to_1',
+				rightAll: '#js_right_All_1',
+				rightSelected: '#js_right_Selected_1',
+				leftSelected: '#js_left_Selected_1',
+				leftAll: '#js_left_All_1'
+			});
+			*/
+
+			$('#project').multiselect();
+		
+	})
+		
+	//查询按钮
+	function query() {
+		
+		var username = $('#username').val();
+		
+		$.ajax({
+			type : 'POST',
+			url : '/THPBuilder/getAllUsers',
+			//contentType : 'application/json',
+			data : {'username' : username},
+			dataType : 'json',
+			async : true,
+			success : function(data, textStatus) {					
+				//console.log(data);
+				
+				$("#dataGrid").datagrid("loadData", data.rows);  //动态取数据
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				console.log("请求失败，无法获取分组数据");
+			}
+		});
+	}	
+	
+	//save data
+	function saveRelations(){
+		$('#fm').form('submit',{
+			url: url,
+			onSubmit: function(){
+				return $(this).form('validate');
+			},
+			success: function(result){
+				var result = eval('('+result+')');
+				if (result.errorMsg){
+					$.messager.show({
+						title: 'Error',
+						msg: result.errorMsg
+					});
+				} else {
+					$('#dlg').dialog('close');		// close the dialog
+					$('#dataGrid').datagrid('reload');	// reload the user data
+				}
+			}
+		});
+	}
+	
+</script>
+</head>
+<body >
+	<div class="row"  style="width: 300px;" >
+		<div class="col-xs-7">
+			<span id="proname">请选择工程:</span>
+		</div>
+		<div class="col-xs-5">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onclick="saveRelations()">确 定</a>
+		</div>
+	</div>
+	<div class="row"  style="width: 600px;height: 300px;">
+		<div class="col-xs-5">
+			<select name="from" id="projects" class="form-control" size="13">
+				<option value="1">C++</option>
+				<option value="2">C#</option>
+			</select>
+		</div>
+	</div>
+	
+	
+</body>
+</html>
