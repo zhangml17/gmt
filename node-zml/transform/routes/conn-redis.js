@@ -1,8 +1,11 @@
 //连接redis数据库
+var config = require('../db-config.js');
+const REDIS_REST_IP=config.REDIS_REST_IP;
+const REDIS_PORT = config.REDIS_PORT;
 
 var redis = require('redis');
 
-var client = redis.createClient(16379,'192.168.100.42');
+var client = redis.createClient(REDIS_PORT,REDIS_REST_IP);
 
 /*client.on("error",function(err){
   console.log('Error:'+err);
