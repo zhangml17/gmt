@@ -17,7 +17,4 @@ var connection = mysql.createConnection({
   port:PORT
 });
 
-connection.connect();
-
-console.log(HOST);
-console.log(PORT);
+module.exports=connection;
