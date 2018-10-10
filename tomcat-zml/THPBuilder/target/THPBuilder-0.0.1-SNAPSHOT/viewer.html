@@ -6,7 +6,7 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="Cache" content="no-cache">
 	<meta http-equiv="expires" content="0">
-    <title>THPower Cloud</title>
+    <title>Cloud</title>
     <link rel="shortcut icon" href="static/icons/favicon.ico">
     <link rel="stylesheet" href="main/bootstrap/css/bootstrap.min.css" >
     <link rel="stylesheet" href="main/bootstrap/css/bootstrap-datetimepicker.css">
@@ -32,13 +32,13 @@
 	    	
 	    	if(urlf=="" || urlf.indexOf("index.html") == -1)
 	    	{
-	    		//window.location='index.html';   	
+	    		window.location='index.html';   	
 	    		return "";
 	    	}    		
 	    }
 	    
     	//login
-    	TestLoginSource();
+    	//TestLoginSource();
     	
 	    var urlParams = (function (url) {
 	        var result = new Object();
@@ -224,7 +224,7 @@
 		{
 		  /*opacity: 0.5;*/		
 		}
-
+		
     </style>  
 </head>
 
@@ -232,17 +232,20 @@
 <div class="layui-layout layui-layout-admin" >
  	<div class="layui-header header header-demo" summer>
 	  	<div class="layui-main" >  
-		    <button id="closeBtn" class="btn btn-danger">
-			    <span class="glyphicon glyphicon-menu-up"></span>
-			    <span id="downBtn" class="glyphicon glyphicon-menu-down"></span>
-		    </button>
-	        <a href="javascript:void(0)" target="_parent"><img src="main/images/syslogo.png" title="能源云监控系统"/></a>	         
-	    	<select id="projectlists" class="selectpicker component">
-		        <!--  data-live-search="true" multiple		        
-		        <option value="1">项目1</option>
-		        <option value="2">项目2</option>
-		        -->
-		    </select>
+		    <div style="float:left;padding-top:10px; margin-right: 20px;">
+			    <button id="closeBtn" class="btn btn-danger">
+				    <span class="glyphicon glyphicon-menu-up"></span>
+				    <span id="downBtn" class="glyphicon glyphicon-menu-down"></span>
+			    </button>
+		        <a id="headtitle" href="javascript:void(0)" target="_parent" class="title" style="color:#ffffff;font-size:150%;">智慧能源管理系统</a>
+		        <!-- <img src="main/images/syslogo.png" title="能源云监控系统"/> -->	         
+		    	<select id="projectlists" class="selectpicker component">
+			        <!--  data-live-search="true" multiple		        
+			        <option value="1">项目1</option>
+			        <option value="2">项目2</option>
+			        -->
+			    </select>
+		    </div>
 		    <div class="topright" style="padding-top:20px; margin-right: 20px;">
 		        <div id="showDate" style="display:block; float:left; color: #fff;width: 240px;"></div>
 		        <a href="javascript:void(0);" onclick="THPQuit();" style="display:block; float:left; color: #fff;width: 50px;">退 出</a>
@@ -294,7 +297,7 @@
 	       
     <!-- Creates a container for the graph with a grid wallpaper -->	   
 	<div id="rightContainer" class="container" >		
-		<div id="graphContainer" class="graphContainer" style="cursor:default;">
+		<div id="graphContainer" class="graphContainer" style="cursor:default;overflow-x:auto;">
 		</div>
 		<iframe id="webContainer" frameborder="0" scrolling="no" ></iframe>
     </div>
@@ -445,10 +448,10 @@
     	showalarm = !showalarm;
     	if (showalarm)
 		{
-			$("#displayContainer").animate({height:"300px"},500);
+			$("#displayContainer").animate({height:"200px"},500);
 			$("#alarmContainer").show();
 	        $("#alarmContainer").attr("src", "dbquery/#/realtimealarm");
-	        $("#alarmContainer").css({height:"264px"});
+	        $("#alarmContainer").css({height:"164px"});
 		}else
 		{
 			$("#displayContainer").animate({height:"10px"},500);
@@ -601,6 +604,8 @@
 
 
         });
+        
+        setTitle();
 
         loadProLists();
 
@@ -611,6 +616,15 @@
     });
     
 
+    function setTitle()
+    {
+        var jsonUser = localStorage.getItem("thpcloud.user");
+        var objUser = JSON.parse(jsonUser);     
+        
+        $("#headtitle").text(objUser.usersheadtitle);
+    	
+    
+    }
 
     function getTime() 
     {
@@ -726,7 +740,7 @@
         var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
         if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
         
-        var winHeight = document.body.scrollHeight * 2;
+        var winHeight = document.body.scrollHeight * 1.2;
         if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
 
         var myDiv = document.getElementById('webContainer');   //  div
@@ -761,7 +775,7 @@
         var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
         if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
         
-        var winHeight = document.body.scrollHeight * 2;
+        var winHeight = document.body.scrollHeight * 1.2;
         if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
 
         var myDiv = document.getElementById('webContainer');   //  div
@@ -796,7 +810,7 @@
         var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
         if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
         
-        var winHeight = document.body.scrollHeight * 2;
+        var winHeight = document.body.scrollHeight * 1.2;
         if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
 
         var myDiv = document.getElementById('webContainer');   //  div
@@ -828,7 +842,7 @@
         var winWidth = document.body.scrollWidth - 200;      // 取窗口宽度
         if (winWidth <= 600) winWidth = 600;   // 初始高度并不总能取出，设默认值
         
-        var winHeight = document.body.scrollHeight * 2;
+        var winHeight = document.body.scrollHeight * 1.2;
         if (winHeight <= 600) winHeight = 600;   // 初始高度并不总能取出，设默认值
 
         var myDiv = document.getElementById('webContainer');   //  div

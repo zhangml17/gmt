@@ -138,6 +138,26 @@ GModel = {
                 }
                 return node;
             }
+            if (cell.value && (cell.value.constructor === GEdge || cell.value instanceof GEdge)) {
+                var curVal=cell.value.curVal;
+                var statusList=cell.value.statusList;
+                if(!curVal){ curVal=0; }
+                for(var i=0;i<statusList.length;i++){
+                    var status=statusList[i];
+                    if(curVal>=status.lower && curVal<status.upper){
+                        var state = graph.view.getState(cell);
+                        state.shape.node.getElementsByTagName('path')[0].removeAttribute('visibility');
+                        state.shape.node.getElementsByTagName('path')[0].setAttribute('stroke-width', '6');
+                        state.shape.node.getElementsByTagName('path')[0].setAttribute('stroke', 'lightGray');
+                        state.shape.node.getElementsByTagName('path')[1].setAttribute('class', status.graphAnimation);
+                        if(status.graphStyle!=cell.style){
+                            cell.setStyle(status.graphStyle);
+                        }
+                        break;
+                    }
+                }
+            }
+
 
             return graphConvertValueToString.apply(this, arguments);
         };
@@ -1545,7 +1565,7 @@ GButton.prototype.pageId = null;
 
 GButton.prototype.events={
     'click':function (cell) {
-        ItemClick(cell.value.pageId);
+        ProjectClick(cell.value.pageId);
     }
 };
 
@@ -1937,6 +1957,7 @@ GModel.GVertex = typeof GVertex !== 'undefined' ? GVertex : undefined;
  */
 function GEdge(mxCell){
     GExtendObj.call(this, mxCell, "GEdge");
+    this.curVal=0;
 }
 
 GEdge.prototype = new GExtendObj();
@@ -1947,6 +1968,12 @@ GEdge.prototype.constructor = GEdge;
  * @default []
  */
 GEdge.prototype.statusList = [];
+
+/**
+ * @property {number} curVal 当前值
+ * @default
+ */
+GLinear.prototype.curVal = 0;
 
 /**
  * @property {mxCell} mxCell mxgraph中的mxCell实例

@@ -8,14 +8,14 @@
 	<meta http-equiv="Cache" content="no-cache">
 	<meta http-equiv="expires" content="0">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>THPower Cloud</title>
+    <title>Cloud</title>
 	<link rel="shortcut icon" href="static/icons/favicon.ico">
 	
 	<link rel="stylesheet" type="text/css" href="static/autohtml/css/icomoon.css">
     <link rel="stylesheet" type="text/css" href="static/styles/grapheditor.css">
     <link rel="stylesheet" type="text/css" href="static/styles/editor_default.css">
     <link rel="stylesheet" type="text/css" href="static/thpower/thpcloud.css">
-     
+	<link rel="stylesheet" type="text/css" href="static/styles/GModel.css">
     <!-- jQuery -->
     <script type="text/javascript" src="static/jquery/jquery-3.2.1.js"></script>	
        
@@ -73,42 +73,6 @@
 	 -->
     
 	<style>
-         .forward1{
-        	animation:solid 0.09s linear;
-        	animation-iteration-count:infinite;
-        }
-          @keyframes solid {
-            to{
-                stroke-dashoffset:-16;
-            }
-        }
-        .forward2{
-        	animation:solid 0.9s linear;
-        	animation-iteration-count:infinite;
-        }
-         @keyframes solid {
-            to{
-                stroke-dashoffset:-16;
-            }
-        }
-        .reverse1{
-        	animation:doted 0.09s linear;
-        	animation-iteration-count:infinite;
-        }
-        @keyframes doted {
-            to{
-                stroke-dashoffset:16;
-            }
-        }
-        .reverse2{
-        	animation:doted 1s linear;
-        	animation-iteration-count:infinite;
-        }
-        @keyframes doted {
-            to{
-                stroke-dashoffset:16;
-            }
-        }
 .fh5co-loader {
 	position: fixed;
 	left: 0px;
@@ -397,14 +361,14 @@ button.btn_dataIds_link{
 	    	
 	    	if(urlf=="" || urlf.indexOf("index.html") == -1)
 	    	{
-	    		//window.location='index.html';   	
+	    		window.location='index.html';   	
 	    		return "";
 	    	}   
 	    	
 	    }
 	    
 		//login
-		TestLoginSource();
+		//TestLoginSource();
 	
 		var MAIN = {
             'joinNode': 4,

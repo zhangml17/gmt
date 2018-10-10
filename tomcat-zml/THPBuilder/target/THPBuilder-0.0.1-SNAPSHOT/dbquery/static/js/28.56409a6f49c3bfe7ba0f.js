@@ -1,0 +1,2 @@
+webpackJsonp([28],{Ggn4:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r={render:function(){this.$createElement;this._self._c;return this._m(0)},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("div",[e("img",{attrs:{src:n("zP+n"),alt:""}})])}]};var i=n("VU/8")({data:function(){return{}}},r,!1,function(t){n("Zrxp")},"data-v-04510093",null);e.default=i.exports},Zrxp:function(t,e){},"zP+n":function(t,e,n){t.exports=n.p+"static/img/02数据分析@1x.68910e2.jpg"}});
+//# sourceMappingURL=28.56409a6f49c3bfe7ba0f.js.map

@@ -9,7 +9,7 @@
 	<meta http-equiv="expires" content="0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="power system,online,diagram,power">
-	<title>国科恒通智慧能源云平台</title>
+	<title>智慧能源云平台</title>
 			
 	<link rel="shortcut icon" href="main/images/favicon.ico">	
 	<link href="main/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -167,11 +167,11 @@
         <input type="hidden" name="csrfmiddlewaretoken" value="wHTKHDHcFoYjTAUaKJFQoV6sjBd8mBRh"></input>
         <div class="userdiv input-group container" style="text-align:center;" >
         	<span class="glyphicon glyphicon-user input-group-addon" style="width: 50px;"></span>
-            <input id="user" class="signinput form-control" type="text" placeholder="邮箱:thpower@qq.com" name="email" value="">
+            <input id="user" class="signinput form-control" type="text" placeholder="邮箱" name="email">
         </div>
         <div class="pwddiv input-group container">
         	<span class="glyphicon glyphicon-lock input-group-addon" style="width: 50px;"></span>
-            <input id="pwd" class="signinput form-control"  type="password"  placeholder="密码" name="password" value="">
+            <input id="pwd" class="signinput form-control"  type="password"  placeholder="密码" name="password">
             <input id="off" type="hidden" name="off_key" value="">
         </div>  
             
@@ -394,17 +394,56 @@
         $(this).addClass('active');
     });
     
+    function GetQueryString(name) {
+        var str = window.location.href; //取得整个地址栏
+        var num = str.indexOf("?")
+        str = str.substr(num + 1); //取得所有参数   stringvar.substr(start [, length ]
+
+        var arr = str.split("&"); //各个参数放到数组里
+        for (var i = 0; i < arr.length; i++) {
+            num = arr[i].indexOf("=");
+            if (num > 0) {
+                if (name === arr[i].substring(0, num)) {
+                    return decodeURIComponent(arr[i].substr(num + 1));
+                }
+            }
+        }
+        return "";
+    }
+    
+    var urlParams = (function (url) {
+        var result = new Object();
+        var idx = url.lastIndexOf('?');
+
+        if (idx > 0) {
+            var params = url.substring(idx + 1).split('&');
+
+            for (var i = 0; i < params.length; i++) {
+                idx = params[i].indexOf('=');
+
+                if (idx > 0) {
+                    result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                }
+            }
+        }
+
+        return result;
+        
+	})(window.location.href);
+    
     $(document).ready(function() {
     	
    	   //判断来路链接是否为空,若为空则是直接访问，否则其他也redirect过来访问
    	   var urlf = document.referrer;
-   	   if(urlf.indexOf("editor.html") != -1)
-   		{
-			 window.off_key = "toeditor";  
-   		}else if(urlf=="" || urlf.indexOf("viewer.html") != -1)
+   	   var urllogin = urlParams['login'];
+   	   
+   	   if(urllogin==undefined || urllogin=="" || urllogin.indexOf("toviewer") != -1)
    		{
 			 window.off_key = "toviewer";  	
-  		} 
+  		} else  if(urllogin.indexOf("toeditor") != -1)
+   		{
+			 window.off_key = "toeditor";  	
+ 		} 
    	   
    	   $("#off").val(off_key);
     	

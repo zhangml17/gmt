@@ -5,3 +5,44 @@
 @keyframes blink {
     from { opacity:0; } to { opacity:1;  }
 }
+
+.forward1{
+    stroke-dasharray:8;
+    animation:solid 0.09s linear;
+    animation-iteration-count:infinite;
+}
+@keyframes solid {
+    to{
+        stroke-dashoffset:-16;
+    }
+}
+.forward2{
+    stroke-dasharray:8;
+    animation:solid 0.9s linear;
+    animation-iteration-count:infinite;
+}
+@keyframes solid {
+    to{
+        stroke-dashoffset:-16;
+    }
+}
+.reverse1{
+    stroke-dasharray:8;
+    animation:doted 0.09s linear;
+    animation-iteration-count:infinite;
+}
+@keyframes doted {
+    to{
+        stroke-dashoffset:16;
+    }
+}
+.reverse2{
+    stroke-dasharray:8;
+    animation:doted 1s linear;
+    animation-iteration-count:infinite;
+}
+@keyframes doted {
+    to{
+        stroke-dashoffset:16;
+    }
+}

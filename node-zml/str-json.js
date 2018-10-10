@@ -42,5 +42,8 @@ console.log("字符串类型:"+strMap);
 //3、将字符串转换为JSON对象
 var json = JSON.parse(strMap);
 
+console.log("json对象:");
+console.log(json);
+
 console.log("对象取值：");
 console.log(json.result[0].key3);

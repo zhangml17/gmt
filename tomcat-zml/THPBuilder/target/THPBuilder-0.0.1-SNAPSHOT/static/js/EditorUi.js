@@ -1290,10 +1290,11 @@ EditorUi.prototype.initClipboard = function()
 		else
 		{
 			result = mxClipboardPaste.apply(this, arguments);
+            graph.moveCells (result, 10, 10);
 		}
 		
 		ui.updatePasteActionStates();
-		
+        mxClipboard.copy(graph);
 		return result;
 	};
 
@@ -3743,7 +3744,7 @@ EditorUi.prototype.showImageDialog = function(title, value, fn, ignoreExisting)
 EditorUi.prototype.showLinkDialog = function(value, btnLabel, fn)
 {
 	var dlg = new LinkDialog(this, value, btnLabel, fn);
-	this.showDialog(dlg.container, 420, 90, true, true);
+	this.showDialog(dlg.container, 420, 160, true, true);
 	dlg.init();
 };
 

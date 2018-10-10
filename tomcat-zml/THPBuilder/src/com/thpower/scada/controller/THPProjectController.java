@@ -868,6 +868,7 @@ public class THPProjectController {
         format.setEncoding(charset); 
         StringWriter sw = new StringWriter(); 
         XMLWriter xw = new XMLWriter(sw, format); 
+        //设置DOM4J是否自动转义
         xw.setEscapeText(istrans); 
         try { 
                 xw.write(document); 

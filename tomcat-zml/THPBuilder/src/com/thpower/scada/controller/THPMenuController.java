@@ -95,6 +95,7 @@ public class THPMenuController {
 	        mapff.put("appIndex", menu.getMenuIndex());
 	        mapff.put("appRoot", menu.getMenuContent());
 	        mapff.put("appCurrent", "0");
+	        //elefloor：工程
 	        mapff.put("typeFloor", "elefloor");
 
 	        listp.add(mapff); 
@@ -313,6 +314,7 @@ public class THPMenuController {
         out.close();         
 	}
 
+	//WEB-INF/views/test.jsp中调用给方法
 	@RequestMapping("/getFromDBFileContent")
 	public void getFromDBFileContent(@RequestParam("menuid") long menuid,
 			HttpServletRequest request, HttpServletResponse response,
@@ -337,7 +339,7 @@ public class THPMenuController {
         out.flush();
         out.close();         
 	}
-	
+	//WEB-INF/views/test.jsp中调用给方法
 	@RequestMapping("/saveToDBFileContent")
 	@ResponseBody
 	public void saveToDBFileContent(@RequestBody THPMenu menu,

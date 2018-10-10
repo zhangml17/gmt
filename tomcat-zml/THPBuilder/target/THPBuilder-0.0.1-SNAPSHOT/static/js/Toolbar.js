@@ -339,7 +339,7 @@ Toolbar.prototype.init = function()
 	//sidebar
 	//main-editor
 	//toolbar
-	this.addSearch();
+	//this.addSearch();
 		
 
 	//search ipnut
@@ -934,7 +934,7 @@ Toolbar.prototype.addSeparator = function(c)
 };
 
 
-Toolbar.prototype.addSearch = function(c)
+/*Toolbar.prototype.addSearch = function(c)
 {
 	//c = (c != null) ? c : this.container;
 	c = (c != null) ? c : document.body;
@@ -1077,7 +1077,7 @@ Toolbar.prototype.addSearch = function(c)
 	c.appendChild(elt);
 
 	return elt;
-};
+};*/
 
 /**
  * Adds given action item

@@ -4522,115 +4522,41 @@ if (typeof mxVertexHandler != 'undefined')
 		 */
         Graph.prototype.turnShapes = function(cells)
         {
-            if(!cells || !cells.length){
-                return ;
-            }
-            var model = this.getModel();
-            var select = [];
-
-            model.beginUpdate();
-            try
-            {
-                for (var i = 0; i < cells.length; i++)
-                {
-                    var cell = cells[i];
-
-                    if (model.isEdge(cell))
-                    {
-                        var src = model.getTerminal(cell, true);
-                        var trg = model.getTerminal(cell, false);
-
-                        model.setTerminal(cell, trg, true);
-                        model.setTerminal(cell, src, false);
-
-                        var geo = model.getGeometry(cell);
-
-                        if (geo != null)
-                        {
-                            geo = geo.clone();
-
-                            if (geo.points != null)
-                            {
-                                geo.points.reverse();
-                            }
-
-                            var sp = geo.getTerminalPoint(true);
-                            var tp = geo.getTerminalPoint(false)
-
-                            geo.setTerminalPoint(sp, false);
-                            geo.setTerminalPoint(tp, true);
-                            model.setGeometry(cell, geo);
-
-                            // Inverts constraints
-                            var edgeState = this.view.getState(cell);
-                            var sourceState = this.view.getState(src);
-                            var targetState = this.view.getState(trg);
-
-                            if (edgeState != null)
-                            {
-                                var sc = (sourceState != null) ? this.getConnectionConstraint(edgeState, sourceState, true) : null;
-                                var tc = (targetState != null) ? this.getConnectionConstraint(edgeState, targetState, false) : null;
-
-                                this.setConnectionConstraint(cell, src, true, tc);
-                                this.setConnectionConstraint(cell, trg, false, sc);
-                            }
-
-                            select.push(cell);
+        	var graph=this;
+            function rotateCell(cell, angle, parent) {
+                var model = graph.getModel();
+                if (model.isVertex(cell) || model.isEdge(cell)) {
+                    if (!model.isEdge(cell)) {
+                        var state = graph.view.getState(cell);
+                        var style = (state != null) ? state.style : graph.getCellStyle(cell);
+                        if (style != null) {
+                            var total = (style[mxConstants.STYLE_ROTATION] || 0) + angle;
+                            graph.setCellStyles(mxConstants.STYLE_ROTATION, total%360, [cell]);
                         }
                     }
-                    else if (model.isVertex(cell))
-                    {
-                        var geo = this.getCellGeometry(cell);
-
-                        if (geo != null)
-                        {
-                            // Rotates the size and position in the geometry
+                    var geo = graph.getCellGeometry(cell);
+                    if (geo != null) {
+                        var pgeo = graph.getCellGeometry(parent);
+                        if (pgeo != null && !model.isEdge(parent)) {
                             geo = geo.clone();
-                            geo.x += geo.width / 2 - geo.height / 2;
-                            geo.y += geo.height / 2 - geo.width / 2;
-                            var tmp = geo.width;
-                            geo.width = geo.height;
-                            geo.height = tmp;
+                            geo.rotate(angle, new mxPoint(pgeo.width / 2, pgeo.height / 2));
                             model.setGeometry(cell, geo);
-
-                            // Reads the current direction and advances by 90 degrees
-                            var state = this.view.getState(cell);
-
-                            if (state != null)
-                            {
-                                var dir = state.style[mxConstants.STYLE_DIRECTION] || 'east'/*default*/;
-
-                                if (dir == 'east')
-                                {
-                                    dir = 'south';
-                                }
-                                else if (dir == 'south')
-                                {
-                                    dir = 'west';
-                                }
-                                else if (dir == 'west')
-                                {
-                                    dir = 'north';
-                                }
-                                else if (dir == 'north')
-                                {
-                                    dir = 'east';
-                                }
-
-                                this.setCellStyles(mxConstants.STYLE_DIRECTION, dir, [cell]);
-                            }
+                        }
+                        if ((model.isVertex(cell) && !geo.relative) || model.isEdge(cell)) {
                             // Recursive rotation
-                            this.turnShapes(model.getChildren(cell));
-                            select.push(cell);
+                            var childCount = model.getChildCount(cell);
+                            for (var i = 0; i < childCount; i++) {
+                                rotateCell(model.getChildAt(cell, i), angle, cell);
+                            }
                         }
                     }
                 }
             }
-            finally
-            {
-                model.endUpdate();
-            }
-            return select;
+
+            cells.forEach(function (cell) {
+                rotateCell(cell, 90);
+            });
+            return cells;
         };
 		// Graph.prototype.turnShapes = function(cells)
 		// {

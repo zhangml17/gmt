@@ -502,7 +502,7 @@ Actions.prototype.init = function()
 					{
 						graph.setTooltipForCell(cell, newValue);
 					});
-					ui.showDialog(dlg.container, 320, 200, true, true);
+					ui.showDialog(dlg.container, 362, 250, true, true);
 					dlg.init();
 				}
 			});
@@ -633,7 +633,7 @@ Actions.prototype.init = function()
 					graph.setCellStyle(mxUtils.trim(newValue), cells);
 				}
 			}, null, null, 400, 220);
-			this.editorUi.showDialog(dlg.container, 420, 300, true, true);
+			this.editorUi.showDialog(dlg.container, 460, 340, true, true);
 			dlg.init();
 		}
 	}), null, null, Editor.ctrlKey + '+E');

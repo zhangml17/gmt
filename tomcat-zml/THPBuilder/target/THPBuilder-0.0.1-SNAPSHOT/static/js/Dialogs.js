@@ -24,32 +24,32 @@ var OpenDialog = function () {
 };
 
 var OpenProjectDialog = function () {
-	var iframe = document.createElement('iframe');
-	iframe.style.backgroundColor = 'transparent';
-	iframe.allowTransparency = 'true';
-	iframe.style.borderStyle = 'none';
-	iframe.style.borderWidth = '0px';
-	iframe.style.overflow = 'hidden';
-	iframe.frameBorder = '0';
-	
-	// Adds padding as a workaround for box model in older IE versions
-	var dx = (mxClient.IS_VML && (document.documentMode == null || document.documentMode < 8)) ? 20 : 0;
-	
+    var iframe = document.createElement('iframe');
+    iframe.style.backgroundColor = 'transparent';
+    iframe.allowTransparency = 'true';
+    iframe.style.borderStyle = 'none';
+    iframe.style.borderWidth = '0px';
+    iframe.style.overflow = 'hidden';
+    iframe.frameBorder = '0';
+
+    // Adds padding as a workaround for box model in older IE versions
+    var dx = (mxClient.IS_VML && (document.documentMode == null || document.documentMode < 8)) ? 20 : 0;
+
     var jsonProject = localStorage.getItem("thpcloud.user");
     var objProject = JSON.parse(jsonProject);
-    
-	var url = webpath+ "/public/sys_projects.html?userId="+objProject.userid;
-	
-	//iframe.setAttribute('width', (((Editor.useLocalStorage) ? 640 : 320) + dx) + 'px');
-	//iframe.setAttribute('height', (((Editor.useLocalStorage) ? 480 : 220) + dx) + 'px');
-	iframe.setAttribute('width', 300+ 'px');
-	iframe.setAttribute('height', 350 + 'px');
-	iframe.setAttribute('src', url);
-	
-	/////////////////////////
-	var apply =null;
+
+    var url = webpath + "/public/sys_projects.html?userId=" + objProject.userid;
+
+    //iframe.setAttribute('width', (((Editor.useLocalStorage) ? 640 : 320) + dx) + 'px');
+    //iframe.setAttribute('height', (((Editor.useLocalStorage) ? 480 : 220) + dx) + 'px');
+    iframe.setAttribute('width', 300 + 'px');
+    iframe.setAttribute('height', 350 + 'px');
+    iframe.setAttribute('src', url);
+
+    /////////////////////////
+    var apply = null;
     var div = document.createElement('div');
-	var buttons = document.createElement('div');
+    var buttons = document.createElement('div');
     buttons.style.textAlign = 'right';
     buttons.style.whiteSpace = 'nowrap';
 
@@ -68,50 +68,50 @@ var OpenProjectDialog = function () {
 
     //var applyFunction = (apply != null) ? apply : this.createApplyFunction();
 
-    var applyBtn = mxUtils.button(mxResources.get('apply'), function () {    	
-    	
+    var applyBtn = mxUtils.button(mxResources.get('apply'), function () {
+
         editorUi.hideDialog();
     });
-    
+
     applyBtn.className = 'geBtn gePrimaryBtn';
     buttons.appendChild(applyBtn);
     /////////
-    
+
     div.appendChild(iframe);
-    
+
     div.appendChild(buttons);
-	
-	this.container = div;
+
+    this.container = div;
 };
 
 
 var NewProjectDialog = function () {
-	var iframe = document.createElement('iframe');
-	iframe.style.backgroundColor = 'transparent';
-	iframe.allowTransparency = 'true';
-	iframe.style.borderStyle = 'none';
-	iframe.style.borderWidth = '0px';
-	iframe.style.overflow = 'hidden';
-	iframe.frameBorder = '0';
-	
-	// Adds padding as a workaround for box model in older IE versions
-	var dx = (mxClient.IS_VML && (document.documentMode == null || document.documentMode < 8)) ? 20 : 0;
-	
+    var iframe = document.createElement('iframe');
+    iframe.style.backgroundColor = 'transparent';
+    iframe.allowTransparency = 'true';
+    iframe.style.borderStyle = 'none';
+    iframe.style.borderWidth = '0px';
+    iframe.style.overflow = 'hidden';
+    iframe.frameBorder = '0';
+
+    // Adds padding as a workaround for box model in older IE versions
+    var dx = (mxClient.IS_VML && (document.documentMode == null || document.documentMode < 8)) ? 20 : 0;
+
     var jsonProject = localStorage.getItem("thpcloud.user");
     var objProject = JSON.parse(jsonProject);
-    
-	var url = webpath+ "/public/sys_newproject.html?userId="+objProject.userid;
-	
-	//iframe.setAttribute('width', (((Editor.useLocalStorage) ? 640 : 320) + dx) + 'px');
-	//iframe.setAttribute('height', (((Editor.useLocalStorage) ? 480 : 220) + dx) + 'px');
-	iframe.setAttribute('width', 400+ 'px');
-	iframe.setAttribute('height', 300 + 'px');
-	iframe.setAttribute('src', url);
-	
-	/////////////////////////
-	var apply =null;
+
+    var url = webpath + "/public/sys_newproject.html?userId=" + objProject.userid;
+
+    //iframe.setAttribute('width', (((Editor.useLocalStorage) ? 640 : 320) + dx) + 'px');
+    //iframe.setAttribute('height', (((Editor.useLocalStorage) ? 480 : 220) + dx) + 'px');
+    iframe.setAttribute('width', 400 + 'px');
+    iframe.setAttribute('height', 300 + 'px');
+    iframe.setAttribute('src', url);
+
+    /////////////////////////
+    var apply = null;
     var div = document.createElement('div');
-	var buttons = document.createElement('div');
+    var buttons = document.createElement('div');
     buttons.style.textAlign = 'right';
     buttons.style.whiteSpace = 'nowrap';
 
@@ -130,20 +130,20 @@ var NewProjectDialog = function () {
 
     //var applyFunction = (apply != null) ? apply : this.createApplyFunction();
 
-    var applyBtn = mxUtils.button(mxResources.get('apply'), function () {    	
-    	
+    var applyBtn = mxUtils.button(mxResources.get('apply'), function () {
+
         editorUi.hideDialog();
     });
-    
+
     applyBtn.className = 'geBtn gePrimaryBtn';
     buttons.appendChild(applyBtn);
     /////////
-    
+
     div.appendChild(iframe);
-    
+
     div.appendChild(buttons);
-	
-	this.container = div;
+
+    this.container = div;
 };
 
 /**
@@ -286,8 +286,8 @@ var ColorDialog = function (editorUi, color, apply, cancelFn) {
     var buttons = document.createElement('div');
     buttons.style.textAlign = 'right';
     buttons.style.whiteSpace = 'nowrap';
-    buttons.style.position='absolute';
-    buttons.style.bottom='4px';
+    buttons.style.position = 'absolute';
+    buttons.style.bottom = '4px';
     var cancelBtn = mxUtils.button(mxResources.get('cancel'), function () {
         editorUi.hideDialog();
 
@@ -4760,10 +4760,6 @@ var ValueChangeDialog = function (ui, cell) {
     this.container = div;
 };
 var ValueChangeDialogEX = function (ui, cell) {
-    this.init = function () {
-        console.log(cell);
-    };
-//    console.log(cell.value);
     var tIndex = 0, T_MIN_VAL = 0, T_MAX_VAL = 500;
     var gObj = cell.value;
 //    var graph = ui.editor.graph;
@@ -5077,7 +5073,7 @@ var ValueChangeDialogEX = function (ui, cell) {
     tdDiv4.style.width = '40px';
     tempDiv.appendChild(tdDiv4);
     var radioC = document.createElement('input');
-    radioC.id = 'dttRadioC'
+    radioC.id = 'dttRadioC';
     radioC.type = 'checkbox';
     radioC.style.position = 'absolute';
     radioC.style.marginLeft = '15px';
@@ -5132,6 +5128,14 @@ var ValueChangeDialogEX = function (ui, cell) {
     buttons.style.marginTop = '18px';
     buttons.style.textAlign = 'right';
     buttons.appendChild(applyBtn);
+    if (gObj.multiStatus) {
+        var removeAndClose = mxUtils.button(mxResources.get('removeAndClose'), function () {
+            gObj.multiStatus = undefined;
+            ui.hideDialog.apply(ui, arguments);
+        });
+        removeAndClose.className = 'geBtn';
+        buttons.appendChild(removeAndClose);
+    }
     buttons.appendChild(cancelBtn);
     div.appendChild(buttons);
     this.container = div;
@@ -5656,31 +5660,38 @@ function createStepper(input, update, step, height, minVal, maxVal) {
 var lineDynamicStyleDialogEX = function (ui, cell) {
     var graph = ui.editor.graph;
     var state = graph.view.getState(cell);
+    var curStatlist = null;
     //模板
-    cell.className = null;
-    var GEdge=new GModel.GEdge(cell);
+    // var GEdge=new GModel.GEdge(cell);
+    var GEdge;
+    if (cell.value instanceof GModel.GEdge) {
+        GEdge = cell.value;
+    } else {
+        GEdge = new GModel.GEdge(cell);
+        GEdge.statusList = [];
+    }
     var valuespan = document.createElement('div');
-        valuespan.style.lineHeight = '25px';
-        valuespan.style.display = 'table-cell';
-        valuespan.style.width = '80px';
+    valuespan.style.lineHeight = '25px';
+    valuespan.style.display = 'table-cell';
+    valuespan.style.width = '80px';
     var containerdiv = document.createElement('div');
-        containerdiv.style.display = 'table';
-        containerdiv.style.overflow = 'hidden';
-        containerdiv.style.whiteSpace = 'nowrap';
-        containerdiv.style.width = '240px';
-        containerdiv.style.height = '30px';
+    containerdiv.style.display = 'table';
+    containerdiv.style.overflow = 'hidden';
+    containerdiv.style.whiteSpace = 'nowrap';
+    containerdiv.style.width = '240px';
+    containerdiv.style.height = '30px';
     var div = document.createElement('div');
-        div.style.height = '380px';
-        div.style.overflow = 'auto';
+    div.style.height = '380px';
+    div.style.overflow = 'auto';
     //添加标题
     var titlediv = document.createElement('div');
-        titlediv.style.background = '#eee';
-        titlediv.style.marginBottom = '8px';
-        titlediv.style.fontWeight = 'bold';
+    titlediv.style.background = '#eee';
+    titlediv.style.marginBottom = '8px';
+    titlediv.style.fontWeight = 'bold';
     mxUtils.write(titlediv, '线路动态样式');
     div.appendChild(titlediv);
     //Function of packaging and selecting radio buttons
-    function getRadioVal(radios){
+    function getRadioVal(radios) {
         if (radios && radios.length) {
             for (var i = 0; i < radios.length; i++) {
                 if (radios[i].checked) {
@@ -5690,88 +5701,143 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
         }
         return '';
     }
+
+    // 由选中项的value设置radio的对应选中项：radios：要设置的radio组， val当前选中的value值
+    function SetRadioSelected(radios, val) {
+        if (val && radios.length) {
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].value === val) {
+                    radios[i].checked = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 动态创建radio标签
+     * @param obj[object]{name: 标签name属性, value: 标签value值, checked: 布尔值，是否被选中}
+     * @returns {Element}
+     */
+    function createRadio(obj) {
+        var radio = document.createElement('input');
+        radio.value = obj.value;
+        radio.name = obj.name;
+        radio.type = 'radio';
+        if (obj.checked) {
+            radio.setAttribute('checked', true);
+        }
+        return radio;
+    }
+
+    function createTxt(text) {
+        return txt = document.createTextNode(text);
+    }
+
     //数据源
-    var dataSource=localStorage.getItem('thpcloud.datasources');
-        dataSource=JSON.parse(dataSource);
-    var dataspan=valuespan.cloneNode(false);
-        dataspan.innerHTML='数据源：';
-    var datasource=document.createElement('select');
-        datasource.style.width='100px';
-        datasource.style.lineHeight='32px';
-    for(var i=0;i<dataSource.length;i++){
-        var op=document.createElement('option');
-        op.style.width='100%';
-        op.style.textOverflow='ellipsis';
-        op.style.overflow='hidden';
-        op.value=dataSource[i].url;
-        op.innerHTML=dataSource[i].url;
+    var dataSource = localStorage.getItem('thpcloud.datasources');
+    dataSource = JSON.parse(dataSource);
+    var dataspan = valuespan.cloneNode(false);
+    dataspan.innerHTML = '数据源：';
+    var datasource = document.createElement('select');
+    datasource.style.width = '100px';
+    datasource.style.lineHeight = '32px';
+    if (!GEdge.dataSrc) {
+        var op = document.createElement('option');
+        op.value = '';
+        op.innerHTML = '无';
         datasource.appendChild(op);
-    };
-    GEdge.dataSrc=datasource.options[datasource.selectedIndex].value;
-    var datadiv=containerdiv.cloneNode(false);
+    }
+    for (var i = 0; i < dataSource.length; i++) {
+        var op = document.createElement('option');
+        op.style.width = '100%';
+        op.style.textOverflow = 'ellipsis';
+        op.style.overflow = 'hidden';
+        op.value = dataSource[i].url;
+        // 设置默认值 todo
+        if (dataSource[i].url === GEdge.dataSrc) {
+            op.setAttribute('selected', true);
+        }
+        op.innerHTML = dataSource[i].url;
+        datasource.appendChild(op);
+    }
+    GEdge.dataSrc = datasource.value;
+
+    var datadiv = containerdiv.cloneNode(false);
     datadiv.appendChild(dataspan);
     datadiv.appendChild(datasource);
     div.appendChild(datadiv);
     //测点表
-    var meter=localStorage.getItem('thpcloud.tables');
-    meter=JSON.parse(meter);
-    var meterspan=valuespan.cloneNode(false);
-    meterspan.innerHTML='测点表：';
-    var meterselect=datasource.cloneNode(false);
-    for(var key in meter){
-        var op=document.createElement('option');
-        op.style.width='100%';
-        op.style.textOverflow='ellipsis';
-        op.style.whiteSpace='nowrap';
-        op.value=meter[key];
-        op.innerHTML=meter[key];
+    var meter = localStorage.getItem('thpcloud.tables');
+    meter = JSON.parse(meter);
+    var meterspan = valuespan.cloneNode(false);
+    meterspan.innerHTML = '测点表：';
+    var meterselect = datasource.cloneNode(false);
+    if (!GEdge.measTable) {
+        var op = document.createElement('option');
+        op.value = '';
+        op.innerHTML = '无';
         meterselect.appendChild(op);
-    };
-    GEdge.measTable=meterselect.options[meterselect.selectedIndex].value;
-    var meterdiv=containerdiv.cloneNode(false);
+    }
+    for (var key in meter) {
+        var op = document.createElement('option');
+        op.style.width = '100%';
+        op.style.textOverflow = 'ellipsis';
+        op.style.whiteSpace = 'nowrap';
+        op.value = meter[key];
+        // 设置默认值 todo
+        if (meter[key] === GEdge.measTable) {
+            op.setAttribute('selected', true);
+        }
+        op.innerHTML = meter[key];
+        meterselect.appendChild(op);
+    }
+    ;
+    GEdge.measTable = meterselect.value;
+
+    var meterdiv = containerdiv.cloneNode(false);
     meterdiv.appendChild(meterspan);
     meterdiv.appendChild(meterselect);
     div.appendChild(meterdiv);
     //测试点
-    var testptspan=valuespan.cloneNode(false);
-        testptspan.innerHTML='测试点：';
-    testptspan.style.postion='absolute';
-    testptspan.style.left='0px';
-    testptspan.style.top='0px';
-    var testptinput=document.createElement('input');
-        testptinput.innerHTML+='<input class="param-inpt" type="text" autocomplete="off" width="100px"/>';
-    testptinput.style.width='64px';
-    testptinput.style.height='21px';
-    testptinput.value=1;
+    var testptspan = valuespan.cloneNode(false);
+    testptspan.innerHTML = '测试点：';
+    var testptinput = document.createElement('input');
+    testptinput.innerHTML += '<input class="param-inpt" type="text" autocomplete="off" width="100px" value="' + cell.dataIds + '"/>';
+    testptinput.style.width = '64px';
+    testptinput.style.height = '21px';
+    testptinput.value = GEdge.dataIds || '';
     var btnLink = document.createElement('button');
     btnLink.className = 'btn_dataIds_link';
-    btnLink.style.position='absolute';
-    btnLink.style.left='144px';
+    btnLink.style.position = 'absolute';
+    btnLink.style.left = '144px';
     mxEvent.addListener(btnLink, 'click', function () {
         var dlg = new TestptDialogEX(ui, cell, this.previousSibling);
         ui.showDialog(dlg.container, 1010, 642, true, false);
     });
-    var testptdiv=containerdiv.cloneNode(false);
-        testptdiv.style.position='relative';
-        testptdiv.style.left=0;
-        testptdiv.style.top=0;
-        testptdiv.appendChild(testptspan);
-        testptdiv.appendChild(testptinput);
-        testptdiv.appendChild(btnLink);
-        div.appendChild(testptdiv);
-    GEdge.dataIds=testptinput.value;
+    var testptdiv = containerdiv.cloneNode(false);
+    testptdiv.style.position = 'relative';
+    testptdiv.style.left = 0;
+    testptdiv.style.top = 0;
+    testptdiv.appendChild(testptspan);
+    testptdiv.appendChild(testptinput);
+    testptdiv.appendChild(btnLink);
+    div.appendChild(testptdiv);
+    GEdge.dataIds = testptinput.value;
     //状态量
-    var statnumspan=valuespan.cloneNode(false);
-        statnumspan.innerHTML='状态量：';
-        statnumspan.style.float='left';
+    var statnumspan = valuespan.cloneNode(false);
+    statnumspan.innerHTML = '状态量：';
+    statnumspan.style.float = 'left';
     var statinput = document.createElement('input');
-        statinput.style.width = '40px';
-        statinput.style.textAlign = 'center';
-        statinput.style.disabled=true;
-        statinput.style.height = '20px';
-        statinput.value=2;
-        statinput.setAttribute('readonly', 'readonly');
-        var statval=null;
+    statinput.style.width = '40px';
+    statinput.style.textAlign = 'center';
+    statinput.style.disabled = true;
+    statinput.style.height = '20px';
+    statinput.value = GEdge.statusList.length || 2;
+
+    statinput.setAttribute('readonly', 'readonly');
+    var statval = null;
+
     function stateStepper(input, update, step, height, minVal, maxVal) {
         if (!minVal) {
             minVal = 1;
@@ -5797,8 +5863,6 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
         down.style.height = height + 'px';
         down.className = 'geBtnDown';
         stepper.appendChild(down);
-        var opLength=statinput.value;
-
         mxEvent.addListener(down, 'click', function (evt) {
             if (input.value == '') {
                 input.value = '2';
@@ -5806,13 +5870,13 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
             var val = parseInt(input.value);
             if (!isNaN(val)) {
                 if (val - step >= minVal) {
-                    GEdge.statusList=addCelldata(input.value);
+                    GEdge.statusList = addCelldata(input.value);
                     input.value = val - step;
-                    GEdge.statusList.pop(GEdge.statusList[GEdge.statusList.length-1]);
+                    GEdge.statusList.length--;
                     Statop(stateselect, input.value);
-                    var curCell = cell.value.statusList[stateselect.value];
-                    inputstar.value = curCell.inpLower;
-                    inputend.value = curCell.inpUpper;
+                    var curCell = cell.value.statusList[stateselect.value - 1];
+                    inputstar.value = curCell.lower;
+                    inputend.value = curCell.upper;
                     if (update != null) {
                         update(evt);
                     }
@@ -5828,18 +5892,19 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
             if (!isNaN(val)) {
                 if (val + step <= maxVal) {
                     input.value = val + step;
-                    cellData=new GModel.DataDrawingDef();
+                    cellData = new GModel.DataDrawingDef();
                     cellData.graphStyle = linenewSty;
+                    cellData.graphAnimation = lineClass;
                     cellData.lower = GEdge.statusList.length * 100;
                     cellData.upper = (GEdge.statusList.length + 1 ) * 100;
-                    cellData.inpLower = cellData.lower;
-                    cellData.inpUpper = cellData.upper;
                     GEdge.statusList.push(cellData);
+                    // cell.statusList.push(cellData);
                     Statop(stateselect, input.value);
 
-                    var curCell = cell.value.statusList[stateselect.value];
-                    inputstar.value = curCell.inpLower;
-                    inputend.value = curCell.inpUpper;
+                    var curCell = cell.value.statusList[stateselect.value - 1];
+
+                    inputstar.value = curCell.lower;
+                    inputend.value = curCell.upper;
 
                     if (update != null) {
                         update(evt);
@@ -5850,179 +5915,195 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
         });
         return stepper;
     };
-    var statstepper = stateStepper(statinput, function(){
+    var statstepper = stateStepper(statinput, function () {
         var val = parseInt(statinput.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<1){
-            val=1;
+        if (val < 1) {
+            val = 1;
         }
-        if(val>3000){
-            val=3000;
+        if (val > 3000) {
+            val = 3000;
         }
-        statval=val;
-        statinput.value=val;
+        statval = val;
+        statinput.value = val;
     });
     //创建状态这项option的函数
-    function Statop(sele, numary) {
-        var strOpt = '';
-        for(var i=0;i<numary;i++){
-            strOpt += '<option value="${i}">${i}</option>';
+    function Statop(sele, num) {
+        var str = '';
+        for (var i = 1; i <= num; i++) {
+            str += '<option value="' + i + '">' + i + '</option>';
         }
-        sele.innerHTML = strOpt;
-    };
+        sele.innerHTML = str;
+    }
 
     statstepper.style.marginLeft = '40px';
     statstepper.style.marginTop = '-20px';
-    var statnumdiv=document.createElement('div');
-    statnumdiv.style.width='100px';
-    statnumdiv.style.float='left';
+    var statnumdiv = document.createElement('div');
+    statnumdiv.style.width = '100px';
+    statnumdiv.style.float = 'left';
     statnumdiv.appendChild(statinput);
     statnumdiv.appendChild(statstepper);
     var tempDiv = containerdiv.cloneNode(false);
     tempDiv.style.height = '30px';
-    tempDiv.style.overflow='hidden';
+    tempDiv.style.overflow = 'hidden';
     tempDiv.appendChild(statnumspan);
     tempDiv.appendChild(statnumdiv);
     div.appendChild(tempDiv);
     //state and range
-    var statespan=document.createElement('span');
-    statespan.innerHTML='状态：';
-    statespan.style.float='left';
-    statespan.style.marginRight='40px';
-    var stateselect=datasource.cloneNode(false);
-    stateselect.style.float='left';
-    stateselect.style.width='52px';
-    stateselect.style.height='22px';
-    var statenum=statinput.value;
-    for(var j=0;j<statenum;j++){
-        var statop=document.createElement('option');
-        statop.style.width='100%';
-        statop.style.textOverflow='ellipsis';
-        statop.style.whiteSpace='nowrap';
-        statop.value=j;
-        statop.innerHTML=j;
-        statop.style.textAlign = 'center';
+    var statespan = document.createElement('span');
+    statespan.innerHTML = '状态：';
+    statespan.style.float = 'left';
+    statespan.style.marginRight = '40px';
+    var stateselect = datasource.cloneNode(false);
+    stateselect.style.float = 'left';
+    stateselect.style.width = '52px';
+    stateselect.style.height = '22px';
+    var statenum = +statinput.value;
+    for (var j = 1; j < statenum + 1; j++) {
+        var statop = document.createElement('option');
+        statop.value = j;
+        statop.innerHTML = j;
+        if (j === +GEdge.curVal) {
+            statop.setAttribute("selected", true)
+        }
         stateselect.appendChild(statop);
-    };
-    var statediv=containerdiv.cloneNode(false);
+    }
+    GEdge.curVal = stateselect.value || 1;
+
+    //看直线的默认值
+    // var colorval = linebtn.children[0].getAttribute('style');
+    var lineoldSty = cell.style;
+    var linenewSty = lineoldSty + 'strokeWidth=2;stroke=#000000;';
+
+    GEdge.statusList = GEdge.statusList.length ? GEdge.statusList : addCelldata(statenum);
+    // Statop(stateselect,statenum);
+    var gCurCell = GEdge.statusList[stateselect.value - 1];
+    var statediv = containerdiv.cloneNode(false);
     statediv.appendChild(statespan);
     statediv.appendChild(stateselect);
     div.appendChild(statediv);
-    var curIndex=stateselect.options[stateselect.selectedIndex].value;
-    mxEvent.addListener(stateselect, 'change', function(){
-        curIndex=this.value;
-        curIndexState=cell.value.statusList[this.value];
+    var curIndex = stateselect.value;
+    mxEvent.addListener(stateselect, 'change', function () {
+        curIndex = this.value;
+        GEdge.curVal = curIndex;
+        var curIndexState = cell.value.statusList[this.value - 1];
         //把数组的
-        inputstar.value=curIndexState.inpLower;
-        inputend.value=curIndexState.inpUpper;
-        var oldStystr=curIndexState.graphStyle;
+        inputstar.value = curIndexState.lower;
+        inputend.value = curIndexState.upper;
+        var oldStystr = curIndexState.graphStyle;
         var styleAry = oldStystr.split(/[=;]/g);
-        var curCor = styleAry[styleAry.findIndex(function (item) {return item == 'stroke'}) + 1];
-        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:'+curCor+';"></div>';
-        linewidinput.value = styleAry[styleAry.findIndex(function (item) {return item == 'stroke-width'}) + 1];
-        var oldClass=curIndexState.graphAnimation;
-        switch (oldClass){
+        var curCor = styleAry[styleAry.findIndex(function (item) {
+            return item == 'stroke'
+        }) + 1];
+
+        linebtn.children[0].style.backgroundColor = curCor;
+        linewidinput.value = styleAry[styleAry.findIndex(function (item) {
+            return item == 'strokeWidth'
+        }) + 1];
+        var oldClass = curIndexState.graphAnimation;
+        switch (oldClass) {
             case 'forward1':
-                 strDire = '<input type="radio" name="direction" value="zx" checked>正向<input type="radio" name="direction" value="fx" >反向';
-                 valuespan2.innerHTML = strDire;
-                 var strSpeed = '<input type="radio" name="speed" value="fast" checked>快<input type="radio" name="speed" value="slow" >慢';
-                 speedDiv.innerHTML = strSpeed;
+                SetRadioSelected(dire, 'zx');
+                SetRadioSelected(speedVal, 'fast');
                 break;
             case 'forward2':
-                strDire = '<input type="radio" name="direction" value="zx" checked>正向<input type="radio" name="direction" value="fx" >反向';
-                valuespan2.innerHTML = strDire;
-                var strSpeed = '<input type="radio" name="speed" value="fast" >快<input type="radio" name="speed" value="slow" checked>慢';
-                speedDiv.innerHTML = strSpeed;
+                SetRadioSelected(dire, 'zx');
+                SetRadioSelected(speedVal, 'slow');
                 break;
             case 'reverse1':
-                strDire = '<input type="radio" name="direction" value="zx" >正向<input type="radio" name="direction" value="fx" checked>反向';
-                valuespan2.innerHTML = strDire;
-                var strSpeed = '<input type="radio" name="speed" value="fast" checked>快<input type="radio" name="speed" value="slow" >慢';
-                speedDiv.innerHTML = strSpeed;
+                SetRadioSelected(dire, 'fx');
+                SetRadioSelected(speedVal, 'fast');
                 break;
             case 'reverse2':
-                strDire = '<input type="radio" name="direction" value="zx" >正向<input type="radio" name="direction" value="fx" checked>反向';
-                valuespan2.innerHTML = strDire;
-                var strSpeed = '<input type="radio" name="speed" value="fast" >快<input type="radio" name="speed" value="slow" checked>慢';
-                speedDiv.innerHTML = strSpeed;
+                SetRadioSelected(dire, 'fx');
+                SetRadioSelected(speedVal, 'slow');
                 break;
+            default:
+                SetRadioSelected(dire, 'notmove');
         }
     });
-        //范围
-    var rangspan=statespan.cloneNode(false);
-        rangspan.innerHTML='范围：';
-    var inputstar=document.createElement('input');
-        inputstar.innerHTML+='<input class="param-inpt" type="text" autocomplete="off" />';
-        inputstar.style.textAlign='center';
-        inputstar.style.width='47px';
-        inputstar.style.marginRight='6px';
-        inputstar.value=0;
-    var inputend=inputstar.cloneNode(false);
-        inputend.value=100;
-    var rangdiv=containerdiv.cloneNode(false);
-        rangdiv.appendChild(rangspan);
-        rangdiv.appendChild(inputstar);
-        rangdiv.appendChild(inputend);
-        rangdiv.style.overflow='hidden';
-        div.appendChild(rangdiv);
-        var startval=inputstar.value,
-            endval=inputend.value;
+    //范围
+    var rangspan = statespan.cloneNode(false);
+    rangspan.innerHTML = '范围：';
+    var inputstar = document.createElement('input');
+    inputstar.innerHTML += '<input class="param-inpt" type="text" autocomplete="off" />';
+    inputstar.style.textAlign = 'center';
+    inputstar.style.width = '47px';
+    inputstar.style.marginRight = '6px';
+    var inputend = inputstar.cloneNode(false);
+    inputstar.value = gCurCell.lower || (GEdge.curVal -1) * 100;
+    inputend.value = gCurCell.upper || GEdge.curVal * 100;
+    gCurCell.lower = inputstar.value;
+    gCurCell.upper = inputend.value;
+    var rangdiv = containerdiv.cloneNode(false);
+    rangdiv.appendChild(rangspan);
+    rangdiv.appendChild(inputstar);
+    rangdiv.appendChild(inputend);
+    rangdiv.style.overflow = 'hidden';
+    div.appendChild(rangdiv);
     mxEvent.addListener(inputstar, 'change', function () {
         var val = parseInt(this.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<0){
-            val=1;
+        if (val < 0) {
+            val = 1;
         }
-        if(val>100000){
-            val=100000;
+        if (val > 100000) {
+            val = 100000;
         }
-        var curCell = cell.value.statusList[stateselect.value];
-        if (+val < curCell.lower) {
-            val =  curCell.lower
-        } else if (+val >= curCell.inpUpper) {
-            val = curCell.inpUpper - 1;
+        var curCell = cell.value.statusList[stateselect.value - 1];
+        if (+val >= curCell.upper) {
+            val =  curCell.upper -10;
         }
-        curCell.inpLower = val;
-        this.value=val;
+        curCell.lower = val;
+        this.value = val;
     });
     mxEvent.addListener(inputend, 'change', function () {
         var val = parseInt(this.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<0){
-            val=1;
+        if (val < 0) {
+            val = 1;
         }
-        if(val>300000){
-            val=300000;
+        if (val > 300000) {
+            val = 300000;
         }
-        var curCell = cell.value.statusList[stateselect.value];
-        if (+val < curCell.inpLower) {
-            val =  curCell.inpLower + 1;
-        } else if (+val > curCell.upper) {
-            val = curCell.upper;
+        var curCell = cell.value.statusList[stateselect.value - 1];
+        if (+val <= curCell.lower) {
+            val = curCell.lower + 10;
         }
-        curCell.inpUpper = val;
-        this.value=val;
+        curCell.upper = val;
+        this.value = val;
     });
     //color
-    var colorspan=statespan.cloneNode(false);
-        colorspan.innerHTML='颜色：';
+    var colorspan = statespan.cloneNode(false);
+    colorspan.innerHTML = '颜色：';
     var linebtn = document.createElement('button');
     var applyC = function (color) {
-        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:'+(color != null ? color : '#f00') + ';"></div>';
+        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:' + (color != null ? color : '#f00') + ';"></div>';
+        var curCell = GEdge.statusList[stateselect.value - 1];
+        curCell.graphStyle = lineoldSty + 'strokeWidth=' + linewidinput.value + ';stroke=' + color + ';';
     };
-    var cellbg=state.shape.node.getElementsByTagName('path')[1].getAttribute('stroke');
-    linebtn = mxUtils.button('', mxUtils.bind(this, function(evt){
+
+    linebtn = mxUtils.button('', mxUtils.bind(this, function (evt) {
         ui.pickColor(0, applyC);
         mxEvent.consume(evt);
     }));
 
-    linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:'+cellbg+';"></div>';
+    var cellbg1 = gCurCell.graphStyle.match(/;stroke=(.+)/)[1];
+    var cellbg2 = state.shape.node.getElementsByTagName('path')[1].getAttribute('stroke');
+
+    linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:' + (cellbg1 || cellbg2) + ';"></div>';
+
+    // if (gCurCell.graphStyle) {}
+
+    gCurCell.graphStyle = gCurCell.graphStyle.replace(/;stroke=(.+)/, function (arg0, arg1) {
+        return arg0.replace(arg1, (cellbg1 || cellbg2));
+    });
     linebtn.className = 'geColorBtn';
     var colorDiv = containerdiv.cloneNode(false);
     colorDiv.style.height = '30px';
@@ -6030,31 +6111,39 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
     colorDiv.appendChild(linebtn);
     div.appendChild(colorDiv);
     //宽度
-    var statnumspan=valuespan.cloneNode(false);
-    statnumspan.innerHTML='宽度：';
-    statnumspan.style.float='left';
-    var statdiv=document.createElement('div');
-    statdiv.style.width='100px';
-    statdiv.style.float='left';
+    var statnumspan = valuespan.cloneNode(false);
+    statnumspan.innerHTML = '宽度：';
+    statnumspan.style.float = 'left';
+    var statdiv = document.createElement('div');
+    statdiv.style.width = '100px';
+    statdiv.style.float = 'left';
     var linewidinput = document.createElement('input');
     linewidinput.style.textAlign = 'center';
-    linewidinput.value=state.shape.node.getElementsByTagName('path')[1].getAttribute('stroke-width');
+
+    var lineWidth = gCurCell.graphStyle && gCurCell.graphStyle.match(/strokeWidth=(\d+);stroke=/)[1];
+    linewidinput.value = lineWidth || 2;
+
+    gCurCell.graphStyle = gCurCell.graphStyle.replace(/strokeWidth=(\d+);stroke=/, function (arg0, arg1) {
+        return arg0.replace(arg1, linewidinput.value);
+    });
     linewidinput.style.width = '40px';
     linewidinput.style.height = '20px';
-    var widval=linewidinput.value;
-    var linewidstepper = createStepper(linewidinput, function(){
+
+    // linewidinput.value='';
+    var widval = linewidinput.value;
+    var linewidstepper = createStepper(linewidinput, function () {
         var val = parseInt(linewidinput.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<1){
-            val=1;
+        if (val < 1) {
+            val = 1;
         }
-        if(val>30){
-            val=30;
+        if (val > 30) {
+            val = 30;
         }
-        widval=val;
-        this.value=widval;
+        widval = val;
+        this.value = widval;
     }, 1, 9);
     linewidstepper.style.marginLeft = '40px';
     linewidstepper.style.marginTop = '-20px';
@@ -6062,23 +6151,27 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
     statdiv.appendChild(linewidstepper);
     var tempDiv = containerdiv.cloneNode(false);
     tempDiv.style.height = '30px';
-    tempDiv.style.overflow='hidden';
+    tempDiv.style.overflow = 'hidden';
     tempDiv.appendChild(statnumspan);
     tempDiv.appendChild(statdiv);
     div.appendChild(tempDiv);
     mxEvent.addListener(linewidinput, 'change', function () {
         var val = parseInt(this.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<0){
-            val=1;
+        if (val < 0) {
+            val = 1;
         }
-        if(val>30){
-            val=30;
+        if (val > 30) {
+            val = 30;
         }
-        widval=val;
-        this.value=widval;
+        widval = val;
+        var curCell = cell.value.statusList[stateselect.value - 1];
+        curCell.graphStyle = curCell.graphStyle.replace(/(?:strokeWidth=(\d);stroke=)/, function (arg0, arg1) {
+            return arg0.replace(arg1, val);
+        });
+        this.value = widval;
     });
 
     //方向 direction
@@ -6087,114 +6180,174 @@ var lineDynamicStyleDialogEX = function (ui, cell) {
     valuespan.style.display = 'table-cell';
     valuespan.style.width = '54px';
     mxUtils.write(valuespan, '方向：');
-    var valuespan2 = document.createElement('div');
-    var strDire = '<input type="radio" name="direction" value="zx" checked>正向<input type="radio" name="direction" value="fx">反向';
-    valuespan2.innerHTML += strDire;
-    valuespan2.style.marginLeft='24px';
+    var directionDiv = document.createElement('div');
+    var dire1 = createRadio({name: 'direction', value: 'zx'});
+    var dire2 = createRadio({name: 'direction', value: 'fx'});
+    var dire3 = createRadio({name: 'direction', value: 'notmove'});
+    var direTxt1 = createTxt('正向');
+    var direTxt2 = createTxt('反向');
+    var direTxt3 = createTxt('无运动');
+    directionDiv.appendChild(dire1);
+    directionDiv.appendChild(direTxt1);
+    directionDiv.appendChild(dire2);
+    directionDiv.appendChild(direTxt2);
+    directionDiv.appendChild(dire3);
+    directionDiv.appendChild(direTxt3);
+    directionDiv.style.marginLeft = '24px';
     var tempDiv = containerdiv.cloneNode(false);
     tempDiv.appendChild(valuespan);
-    tempDiv.appendChild(valuespan2);
+    tempDiv.appendChild(directionDiv);
     div.appendChild(tempDiv);
     var dire = document.getElementsByName('direction');
+
+    var direAry = [dire1, dire2, dire3];
+    for (var i = 0; i < direAry.length; i++) {
+        mxEvent.addListener(direAry[i], 'change', function () {
+            var curCell = cell.value.statusList[stateselect.value - 1];
+            var speedCheckedVal = getRadioVal(speedVal);
+            var val = this.value;
+            if (val === 'zx' && speedCheckedVal === 'fast') {
+                curCell.graphAnimation = 'forward1';
+            } else if (val === 'zx' && speedCheckedVal === 'slow') {
+                curCell.graphAnimation = 'forward2';
+            } else if (val === 'fx' && speedCheckedVal === 'fast') {
+                curCell.graphAnimation = 'reverse1';
+            } else if (val === 'fx' && speedCheckedVal === 'slow') {
+                curCell.graphAnimation = 'reverse2';
+            } else {
+                curCell.graphAnimation = '';
+            }
+        });
+    }
+
     //速度 speed
     var speed = document.createElement('div');
     speed.style.lineHeight = '25px';
     speed.style.display = 'table-cell';
     speed.style.width = '54px';
     mxUtils.write(speed, '速度：');
-    var speedDiv=document.createElement('div');
-    var strSpeed = '<input type="radio" name="speed" value="fast" checked>快<input type="radio" name="speed" value="slow">慢';
-    speedDiv.innerHTML += strSpeed;
+    var speedDiv = document.createElement('div');
+
+    var speed1 = createRadio({name: 'speed', value: 'fast', checked: true});
+    var speed2 = createRadio({name: 'speed', value: 'slow'});
+    var speedTxt1 = createTxt('快');
+    var speedTxt2 = createTxt('慢');
+    speedDiv.appendChild(speed1);
+    speedDiv.appendChild(speedTxt1);
+    speedDiv.appendChild(speed2);
+    speedDiv.appendChild(speedTxt2);
     var tempDiv = containerdiv.cloneNode(false);
-    speedDiv.style.marginLeft='24px';
+    speedDiv.style.marginLeft = '24px';
     tempDiv.appendChild(speed);
     tempDiv.appendChild(speedDiv);
     div.appendChild(tempDiv);
     var speedVal = document.getElementsByName('speed');
-    //看直线的默认值
-    var colorstr=linebtn.children[0].attributes[0];
-    var colorval=linebtn.children[0].getAttribute('style');
-    var color=colorval.substring(colorval.length-1,colorval.length-8);
-    if(color=='defined'){
-        state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke','#000');
-        state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-dasharray', '8');
-        state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-width', widval);
-    }else{
-        state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke', color);
-        state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-dasharray', '8');
-        state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-width', widval);
+    var speedAry = [speed1, speed2];
+
+    for (var i = 0; i < speedAry.length; i++) {
+        mxEvent.addListener(speedAry[i], 'change', function () {
+            var curCell = cell.value.statusList[stateselect.value - 1];
+            var directionVal = getRadioVal(dire);
+            var val = this.value;
+            if (directionVal === 'zx' && val === 'fast') {
+                curCell.graphAnimation = 'forward1';
+            } else if (directionVal === 'zx' && val === 'slow') {
+                curCell.graphAnimation = 'forward2';
+            } else if (directionVal === 'fx' && val === 'fast') {
+                curCell.graphAnimation = 'reverse1';
+            } else if (directionVal === 'fx' && val === 'slow') {
+                curCell.graphAnimation = 'reverse2';
+            } else {
+                curCell.graphAnimation = '';
+            }
+        });
     }
-    //这里给设置背景
-    state.shape.node.getElementsByTagName('path')[0].setAttribute('visibility','visible');
-    state.shape.node.getElementsByTagName('path')[0].setAttribute('stroke','#CCC');
-    state.shape.node.getElementsByTagName('path')[1].setAttribute('class', 'forward1');
-    var lineoldSty=cell.style;
-    var lineClass='forward1';
-    var linenewSty=lineoldSty+'stroke-width='+widval+';'+'stroke='+cellbg+';';
-    function addCelldata(statenum){
-        var statusList=[];
-        for (var x = 0;x < statenum; x++) {
-            cellData=new GModel.DataDrawingDef();
+
+    var lineClass = gCurCell.graphAnimation || 'forward1';
+    switch (lineClass) {
+        case 'forward1':
+            SetRadioSelected(direAry, 'zx');
+            SetRadioSelected(speedAry, 'fast');
+            break;
+        case 'forward2':
+            SetRadioSelected(direAry, 'zx');
+            SetRadioSelected(speedAry, 'slow');
+            break;
+        case 'reverse1':
+            SetRadioSelected(direAry, 'fx');
+            SetRadioSelected(speedAry, 'fast');
+            break;
+        case 'reverse2':
+            SetRadioSelected(direAry, 'fx');
+            SetRadioSelected(speedAry, 'slow');
+            break;
+        default:
+            SetRadioSelected(direAry, 'notmove');
+            SetRadioSelected(speedAry, 'fast');
+    }
+    gCurCell.graphAnimation = lineClass;
+
+    function addCelldata(statenum) {
+        var statusList = [];
+        for (var x = 0; x < statenum; x++) {
+            cellData = new GModel.DataDrawingDef();
             cellData.graphStyle = linenewSty;
             cellData.graphAnimation = lineClass;
             cellData.lower = x * 100;
             cellData.upper = (x + 1 ) * 100;
-            cellData.inpLower = cellData.lower;
-            cellData.inpUpper = cellData.upper;
             statusList.push(cellData);
-        };
+        }
+
         return statusList;
-    };
-    GEdge.statusList=addCelldata(statenum);
-    cell.value=GEdge;
+    }
+    cell.value = GEdge;
     //按钮 button
     var cancelBtn = mxUtils.button(mxResources.get('cancel'), function () {
         ui.hideDialog.apply(ui, arguments);
     });
     cancelBtn.className = 'geBtn';
     var applyBtn = mxUtils.button(mxResources.get('apply'), function () {
-        //现在要先获取到当前下拉框的选中项，然后点击按钮后根据选中的value找到数组对应索引项，把对应项的都进行修改
-        var colorval=linebtn.children[0].style.backgroundColor;
-        var widval=linewidinput.value;
-        if(!colorval){
-            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke','#000');
-            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-dasharray', '8');
-            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-width', widval);
-        }else{
-            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke', colorval);
-            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroked-asharray', '8');
-            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke-width', widval);
-        }
+        var colorval = linebtn.children[0].style.backgroundColor;
+        var widval = linewidinput.value;
         //现在的情况是只能通过添加类名实现
         var cellClass = '';
         if (getRadioVal(dire) === 'zx' && getRadioVal(speedVal) === 'fast') {
             state.shape.node.getElementsByTagName('path')[1].setAttribute('class', 'forward1');
             cellClass = 'forward1';
-        } else if (getRadioVal(dire) === 'zx'  && getRadioVal(speedVal) === 'slow') {
+        } else if (getRadioVal(dire) === 'zx' && getRadioVal(speedVal) === 'slow') {
             state.shape.node.getElementsByTagName('path')[1].setAttribute('class', 'forward2');
             cellClass = 'forward2';
-        } else if (getRadioVal(dire) === 'fx'  && getRadioVal(speedVal) === 'fast') {
+        } else if (getRadioVal(dire) === 'fx' && getRadioVal(speedVal) === 'fast') {
             state.shape.node.getElementsByTagName('path')[1].setAttribute('class', 'reverse1');
             cellClass = 'reverse1';
-        } else {
+        } else if (getRadioVal(dire) === 'fx' && getRadioVal(speedVal) === 'slow') {
             state.shape.node.getElementsByTagName('path')[1].setAttribute('class', 'reverse2');
             cellClass = 'reverse2';
+        } else {
+            state.shape.node.getElementsByTagName('path')[1].setAttribute('stroke', colorval);
+            state.shape.node.getElementsByTagName('path')[1].setAttribute('strokeWidth', widval);
+            state.shape.node.getElementsByTagName('path')[0].setAttribute('visibility', 'hidden');
+            state.shape.node.getElementsByTagName('path')[1].setAttribute('strokeDasharray', '0');
         }
-        cell.stroke = state.shape.node.getElementsByTagName('path')[0].getAttribute('stroke');
-        var linecor=state.shape.node.getElementsByTagName('path')[1].getAttribute('stroke');
-        var lineoldSty=cell.style;
 
-        var curCell = cell.value.statusList[curIndex];
-        curCell.lower = inputstar.value;
-        curCell.upper = inputend.value;
+        var lineoldSty = cell.style;
+        var curCell = cell.value.statusList[curIndex - 1];
+
+        curCell.lower = +inputstar.value;
+        curCell.upper = +inputend.value;
         curCell.graphAnimation = cellClass;
-        curCell.graphStyle = lineoldSty+'stroke-width='+widval+';'+'stroke='+linecor+';';
-        cell.value.dataSrc=datasource.options[datasource.selectedIndex].value;
-        cell.value.dataIds=testptinput.value;
-        cell.value.measTable=meterselect.options[meterselect.selectedIndex].value;
-        //输出范围输入框的两个值
-        //var statcurval=stateselect.options[stateselect.selectedIndex].value;
-            //得到当前数组对应项的范围
+        curCell.graphStyle = lineoldSty + 'strokeWidth=' + widval + ';' + 'stroke=' + colorval + ';';
+        if (datasource.value === '无') {
+            cell.value.dataSrc = '';
+        } else {
+            cell.value.dataSrc = datasource.value;
+        }
+        if (meterselect.value === '无') {
+            cell.value.measTable = '';
+        } else {
+            cell.value.measTable = meterselect.value;
+        }
+        cell.value.dataIds = testptinput.value;
         ui.hideDialog.apply(ui, arguments);
     });
     applyBtn.className = 'geBtn gePrimaryBtn';
@@ -6211,7 +6364,7 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
     var state = graph.view.getState(cell);
 
     cell.className = null;
-    var GEdge=new GModel.GEdge(cell);
+    var GEdge = new GModel.GEdge(cell);
     //模板
     cell.className = null;
     var valuespan = document.createElement('div');
@@ -6237,7 +6390,7 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
     div.appendChild(titlediv);
 
     //Function of packaging and selecting radio buttons
-    function getRadioVal(radios){
+    function getRadioVal(radios) {
         if (radios && radios.length) {
             for (var i = 0; i < radios.length; i++) {
                 if (radios[i].checked) {
@@ -6247,91 +6400,95 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
         }
         return '';
     }
+
     //数据源
-    var dataSource=localStorage.getItem('thpcloud.datasources');
-        dataSource=JSON.parse(dataSource);
-    var dataspan=valuespan.cloneNode(false);
-        dataspan.innerHTML='数据源：';
-    var datasource=document.createElement('select');
-        datasource.style.width='100px';
-        datasource.style.lineHeight='32px';
-    for(var i=0;i<dataSource.length;i++){
-        var op=document.createElement('option');
-        op.style.width='100%';
-        op.style.textOverflow='ellipsis';
-        op.style.overflow='hidden';
-        var dataS=dataSource[i];
-        op.value=dataSource[i].url;
-        op.innerHTML=dataSource[i].url;
+    var dataSource = localStorage.getItem('thpcloud.datasources');
+    dataSource = JSON.parse(dataSource);
+    var dataspan = valuespan.cloneNode(false);
+    dataspan.innerHTML = '数据源：';
+    var datasource = document.createElement('select');
+    datasource.style.width = '100px';
+    datasource.style.lineHeight = '32px';
+    for (var i = 0; i < dataSource.length; i++) {
+        var op = document.createElement('option');
+        op.style.width = '100%';
+        op.style.textOverflow = 'ellipsis';
+        op.style.overflow = 'hidden';
+        var dataS = dataSource[i];
+        op.value = dataSource[i].url;
+        op.innerHTML = dataSource[i].url;
         datasource.appendChild(op);
-    };
-    var datadiv=containerdiv.cloneNode(false);
-        datadiv.appendChild(dataspan);
-        datadiv.appendChild(datasource);
-        div.appendChild(datadiv);
-    GEdge.dataSrc=datasource.options[datasource.selectedIndex].value;
+    }
+    ;
+    var datadiv = containerdiv.cloneNode(false);
+    datadiv.appendChild(dataspan);
+    datadiv.appendChild(datasource);
+    div.appendChild(datadiv);
+    GEdge.dataSrc = datasource.options[datasource.selectedIndex].value;
     //测点表
-    var meter=localStorage.getItem('thpcloud.tables');
-        meter=JSON.parse(meter);
-    var meterspan=valuespan.cloneNode(false);
-        meterspan.innerHTML='测点表：';
-    var meterselect=datasource.cloneNode(false);
-    for(var key in meter){
-        var op=document.createElement('option');
-        op.style.width='100%';
-        op.style.textOverflow='ellipsis';
-        op.style.whiteSpace='nowrap';
-        op.value=meter[key];
-        op.innerHTML=meter[key];
+    var meter = localStorage.getItem('thpcloud.tables');
+    meter = JSON.parse(meter);
+    var meterspan = valuespan.cloneNode(false);
+    meterspan.innerHTML = '测点表：';
+    var meterselect = datasource.cloneNode(false);
+    for (var key in meter) {
+        var op = document.createElement('option');
+        op.style.width = '100%';
+        op.style.textOverflow = 'ellipsis';
+        op.style.whiteSpace = 'nowrap';
+        op.value = meter[key];
+        op.innerHTML = meter[key];
         meterselect.appendChild(op);
-    };
-    var meterdiv=containerdiv.cloneNode(false);
-        meterdiv.appendChild(meterspan);
-        meterdiv.appendChild(meterselect);
-        div.appendChild(meterdiv);
-    GEdge.measTable=meterselect.options[meterselect.selectedIndex].value;
+    }
+    ;
+    var meterdiv = containerdiv.cloneNode(false);
+    meterdiv.appendChild(meterspan);
+    meterdiv.appendChild(meterselect);
+    div.appendChild(meterdiv);
+    GEdge.measTable = meterselect.options[meterselect.selectedIndex].value;
     //测试点
-    var testptspan=valuespan.cloneNode(false);
-    testptspan.innerHTML='测试点：';
-    testptspan.style.postion='absolute';
-    testptspan.style.left='0px';
-    testptspan.style.top='0px';
-    var testptinput=document.createElement('input');
-    testptinput.innerHTML+='<input class="param-inpt" type="text" autocomplete="off" width="100px"/>';
-    testptinput.style.width='64px';
-    testptinput.style.height='21px';
-    testptinput.style.textAlign='center';
-    testptinput.style.position='absolute';
-    testptinput.value=1;
+    var testptspan = valuespan.cloneNode(false);
+    testptspan.innerHTML = '测试点：';
+    testptspan.style.postion = 'absolute';
+    testptspan.style.left = '0px';
+    testptspan.style.top = '0px';
+    var testptinput = document.createElement('input');
+    testptinput.innerHTML += '<input class="param-inpt" type="text" autocomplete="off" width="100px"/>';
+    testptinput.style.width = '64px';
+    testptinput.style.height = '21px';
+    testptinput.style.textAlign = 'center';
+    testptinput.style.position = 'absolute';
+    testptinput.value = 1;
     var btnLink = document.createElement('button');
     btnLink.className = 'btn_dataIds_link';
-    btnLink.style.position='absolute';
-    btnLink.style.left='144px';
+    btnLink.style.position = 'absolute';
+    btnLink.style.left = '144px';
     mxEvent.addListener(btnLink, 'click', function () {
         var dlg = new TestptDialogEX(ui, cell, this.previousSibling);
         ui.showDialog(dlg.container, 1010, 642, true, false);
     });
-    var testptdiv=containerdiv.cloneNode(false);
-    testptdiv.style.position='relative';
-    testptdiv.style.left=0;
-    testptdiv.style.top=0;
+    var testptdiv = containerdiv.cloneNode(false);
+    testptdiv.style.position = 'relative';
+    testptdiv.style.left = 0;
+    testptdiv.style.top = 0;
     testptdiv.appendChild(testptspan);
     testptdiv.appendChild(testptinput);
     testptdiv.appendChild(btnLink);
     div.appendChild(testptdiv);
-    GEdge.dataIds=testptinput.value;
+    GEdge.dataIds = testptinput.value;
     //状态量
-    var statnumspan=valuespan.cloneNode(false);
-    statnumspan.innerHTML='状态量：';
-    statnumspan.style.float='left';
+    var statnumspan = valuespan.cloneNode(false);
+    statnumspan.innerHTML = '状态量：';
+    statnumspan.style.float = 'left';
     var statinput = document.createElement('input');
     statinput.style.width = '40px';
     statinput.style.textAlign = 'center';
-    statinput.style.disabled=true;
+    statinput.style.disabled = true;
     statinput.style.height = '20px';
-    statinput.value=2;
+    statinput.value = 2;
     statinput.setAttribute('readonly', 'readonly');
-    var statval=null;
+    var statval = null;
+
     function stateStepper(input, update, step, height, minVal, maxVal) {
         if (!minVal) {
             minVal = 1;
@@ -6357,7 +6514,7 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
         down.style.height = height + 'px';
         down.className = 'geBtnDown';
         stepper.appendChild(down);
-        var opLength=statinput.value;
+        var opLength = statinput.value;
         mxEvent.addListener(down, 'click', function (evt) {
             if (input.value == '') {
                 input.value = '2';
@@ -6365,9 +6522,9 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
             var val = parseInt(input.value);
             if (!isNaN(val)) {
                 if (val - step >= minVal) {
-                    GEdge.statusList=addCelldata(input.value);
+                    GEdge.statusList = addCelldata(input.value);
                     input.value = val - step;
-                    GEdge.statusList.pop(GEdge.statusList[GEdge.statusList.length-1]);
+                    GEdge.statusList.pop(GEdge.statusList[GEdge.statusList.length - 1]);
                     Statop(stateselect, input.value);
                     var curCell = cell.value.statusList[stateselect.value];
                     inputstar.value = curCell.inpLower;
@@ -6387,7 +6544,7 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
             if (!isNaN(val)) {
                 if (val + step <= maxVal) {
                     input.value = val + step;
-                    cellData=new GModel.DataDrawingDef();
+                    cellData = new GModel.DataDrawingDef();
                     cellData.graphStyle = linenewSty;
                     cellData.lower = GEdge.statusList.length * 100;
                     cellData.upper = (GEdge.statusList.length + 1 ) * 100;
@@ -6409,185 +6566,190 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
         });
         return stepper;
     };
-    var statstepper = stateStepper(statinput, function(){
+    var statstepper = stateStepper(statinput, function () {
         var val = parseInt(statinput.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<1){
-            val=1;
+        if (val < 1) {
+            val = 1;
         }
-        if(val>3000){
-            val=3000;
+        if (val > 3000) {
+            val = 3000;
         }
-        statval=val;
-        statinput.value=val;
+        statval = val;
+        statinput.value = val;
     });
     //创建状态这项option的函数
     function Statop(sele, numary) {
         var strOpt = '';
-        for(var i=0;i<numary;i++){
+        for (var i = 0; i < numary; i++) {
             strOpt += '<option value="${i}">${i}</option>';
         }
         sele.innerHTML = strOpt;
     };
     statstepper.style.marginLeft = '40px';
     statstepper.style.marginTop = '-20px';
-    var statnumdiv=document.createElement('div');
-    statnumdiv.style.width='100px';
-    statnumdiv.style.float='left';
+    var statnumdiv = document.createElement('div');
+    statnumdiv.style.width = '100px';
+    statnumdiv.style.float = 'left';
     statnumdiv.appendChild(statinput);
     statnumdiv.appendChild(statstepper);
     var tempDiv = containerdiv.cloneNode(false);
     tempDiv.style.height = '30px';
-    tempDiv.style.overflow='hidden';
+    tempDiv.style.overflow = 'hidden';
     tempDiv.appendChild(statnumspan);
     tempDiv.appendChild(statnumdiv);
     div.appendChild(tempDiv);
     //state and range
-    var statespan=document.createElement('span');
-    statespan.innerHTML='状态：';
-    statespan.style.float='left';
-    statespan.style.marginRight='40px';
-    var stateselect=datasource.cloneNode(false);
-    stateselect.style.float='left';
-    stateselect.style.width='52px';
-    stateselect.style.height='22px';
-    var statenum=statinput.value;
-    for(var j=0;j<statenum;j++){
-        var statop=document.createElement('option');
-        statop.style.width='100%';
-        statop.style.textOverflow='ellipsis';
-        statop.style.whiteSpace='nowrap';
-        statop.value=j;
-        statop.innerHTML=j;
+    var statespan = document.createElement('span');
+    statespan.innerHTML = '状态：';
+    statespan.style.float = 'left';
+    statespan.style.marginRight = '40px';
+    var stateselect = datasource.cloneNode(false);
+    stateselect.style.float = 'left';
+    stateselect.style.width = '52px';
+    stateselect.style.height = '22px';
+    var statenum = statinput.value;
+    for (var j = 0; j < statenum; j++) {
+        var statop = document.createElement('option');
+        statop.style.width = '100%';
+        statop.style.textOverflow = 'ellipsis';
+        statop.style.whiteSpace = 'nowrap';
+        statop.value = j;
+        statop.innerHTML = j;
         statop.style.textAlign = 'center';
         stateselect.appendChild(statop);
-    };
-    var statediv=containerdiv.cloneNode(false);
+    }
+    ;
+    var statediv = containerdiv.cloneNode(false);
     statediv.appendChild(statespan);
     statediv.appendChild(stateselect);
     div.appendChild(statediv);
-    var curIndex=stateselect.options[stateselect.selectedIndex].value;
-    mxEvent.addListener(stateselect, 'change', function(){
-        curIndex=this.value;
-        curIndexState=cell.value.statusList[this.value];
+    var curIndex = stateselect.options[stateselect.selectedIndex].value;
+    mxEvent.addListener(stateselect, 'change', function () {
+        curIndex = this.value;
+        curIndexState = cell.value.statusList[this.value];
         //把数组的
-        inputstar.value=curIndexState.inpLower;
-        inputend.value=curIndexState.inpUpper;
-        var oldStystr=curIndexState.graphStyle;
+        inputstar.value = curIndexState.lower;
+        inputend.value = curIndexState.upper;
+        var oldStystr = curIndexState.graphStyle;
         var styleAry = oldStystr.split(/[=;]/g);
-        var curCor = styleAry[styleAry.findIndex(function (item){return item == 'stroke'}) + 1];
-        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:'+curCor+';"></div>';
+        var curCor = styleAry[styleAry.findIndex(function (item) {
+            return item == 'stroke'
+        }) + 1];
+        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:' + curCor + ';"></div>';
     });
     //范围
-    var rangspan=statespan.cloneNode(false);
-    rangspan.innerHTML='范围：';
-    var inputstar=document.createElement('input');
-    inputstar.innerHTML+='<input class="param-inpt" type="text" autocomplete="off" />';
-    inputstar.style.textAlign='center';
-    inputstar.style.width='47px';
-    inputstar.style.height='24px'
-    inputstar.style.marginRight='6px';
-    inputstar.value=0;
-    var inputend=inputstar.cloneNode(false);
-    inputend.value=100;
-    var rangdiv=containerdiv.cloneNode(false);
+    var rangspan = statespan.cloneNode(false);
+    rangspan.innerHTML = '范围：';
+    var inputstar = document.createElement('input');
+    inputstar.innerHTML += '<input class="param-inpt" type="text" autocomplete="off" />';
+    inputstar.style.textAlign = 'center';
+    inputstar.style.width = '47px';
+    inputstar.style.height = '24px'
+    inputstar.style.marginRight = '6px';
+    inputstar.value = 0;
+    var inputend = inputstar.cloneNode(false);
+    inputend.value = 100;
+    var rangdiv = containerdiv.cloneNode(false);
     rangdiv.appendChild(rangspan);
     rangdiv.appendChild(inputstar);
     rangdiv.appendChild(inputend);
-    rangdiv.style.overflow='hidden';
+    rangdiv.style.overflow = 'hidden';
     div.appendChild(rangdiv);
     mxEvent.addListener(inputstar, 'change', function () {
         var val = parseInt(this.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<0){
-            val=1;
+        if (val < 0) {
+            val = 1;
         }
-        if(val>100000){
-            val=100000;
+        if (val > 100000) {
+            val = 100000;
         }
 
         var curCell = cell.value.statusList[stateselect.value];
         if (+val < curCell.lower) {
-            val =  curCell.lower
-        } else if (+val >= curCell.inpUpper) {
-            val = curCell.inpUpper - 1;
+            val = curCell.lower
+        } else if (+val >= curCell.upper) {
+            val = curCell.upper - 1;
         }
-        curCell.inpLower = val;
-        this.value=val;
+        curCell.lower = val;
+        this.value = val;
     });
     mxEvent.addListener(inputend, 'change', function () {
         var val = parseInt(this.value);
         if (isNaN(val)) {
-            val=0;
+            val = 0;
         }
-        if(val<0){
-            val=1;
+        if (val < 0) {
+            val = 1;
         }
-        if(val>300000){
-            val=300000;
+        if (val > 300000) {
+            val = 300000;
         }
         // endval=val;
         var curCell = cell.value.statusList[stateselect.value];
-        if (+val < curCell.inpLower) {
-            val =  curCell.inpLower + 1;
+        if (+val < curCell.lower) {
+            val = curCell.lower + 1;
         } else if (+val > curCell.upper) {
             val = curCell.upper;
         }
-        curCell.inpUpper = val;
-        this.value=val;
+        curCell.upper = val;
+        this.value = val;
     });
     //color
-    var colorspan=statespan.cloneNode(false);
-    colorspan.innerHTML='颜色：';
+    var colorspan = statespan.cloneNode(false);
+    colorspan.innerHTML = '颜色：';
     var linebtn = document.createElement('button');
     var applyC = function (color) {
-        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:'+(color != null ? color : '#f00') + ';"></div>';
+        linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:' + (color != null ? color : '#f00') + ';"></div>';
     };
     graph.setSelectionCell(cell);
-    var cellg=state.shape.node.children[0].tagName;
-    switch (cellg){
+    var cellg = state.shape.node.children[0].tagName;
+    switch (cellg) {
         case 'path':
-            var linecor=state.shape.node.getElementsByTagName('path')[1].getAttribute("stroke");
+            var linecor = state.shape.node.getElementsByTagName('path')[1].getAttribute("stroke");
             break;
         case 'rect':
-            var linecor=state.shape.node.getElementsByTagName('rect')[1].getAttribute("stroke");
+            var linecor = state.shape.node.getElementsByTagName('rect')[1].getAttribute("stroke");
             break;
         case 'ellipse':
-            var linecor=state.shape.node.getElementsByTagName('ellipse')[1].getAttribute("stroke");
+            var linecor = state.shape.node.getElementsByTagName('ellipse')[1].getAttribute("stroke");
             break;
-    };
-    linebtn = mxUtils.button('', mxUtils.bind(this, function(evt){
+    }
+    ;
+    linebtn = mxUtils.button('', mxUtils.bind(this, function (evt) {
         ui.pickColor(0, applyC);
         mxEvent.consume(evt);
     }));
-    linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:'+linecor+';"></div>';
+    linebtn.innerHTML = '<div style="width:36px;height:12px;margin:3px;border:1px solid black;background-color:' + linecor + ';"></div>';
     linebtn.className = 'geColorBtn';
-    var linebtncor=linebtn.children[0].style.backgroundColor;
-    var linenewSty=cell.style+'stroke='+linecor+';';
+    var linebtncor = linebtn.children[0].style.backgroundColor;
+    var linenewSty = cell.style + 'stroke=' + linecor + ';';
     var colorDiv = containerdiv.cloneNode(false);
     colorDiv.style.height = '30px';
     colorDiv.appendChild(colorspan);
     colorDiv.appendChild(linebtn);
     div.appendChild(colorDiv);
-    function addCelldata(statenum){
-        var statusList=[];
-        for (var x = 0;x < statenum; x++) {
-            cellData=new GModel.DataDrawingDef();
+    function addCelldata(statenum) {
+        var statusList = [];
+        for (var x = 0; x < statenum; x++) {
+            cellData = new GModel.DataDrawingDef();
             cellData.graphStyle = linenewSty;
             cellData.lower = x * 100;
             cellData.upper = (x + 1 ) * 100;
             cellData.inpLower = cellData.lower;
             cellData.inpUpper = cellData.upper;
             statusList.push(cellData);
-        };
+        }
+        ;
         return statusList;
     };
-    GEdge.statusList=addCelldata(statenum);
-    cell.value=GEdge;
+    GEdge.statusList = addCelldata(statenum);
+    cell.value = GEdge;
     //按钮 button
     var cancelBtn = mxUtils.button(mxResources.get('cancel'), function () {
         ui.hideDialog.apply(ui, arguments);
@@ -6595,19 +6757,21 @@ var geoDynamicStyleDialogEX = function (ui, cell) {
     cancelBtn.className = 'geBtn';
     var applyBtn = mxUtils.button(mxResources.get('apply'), function () {
         graph.setSelectionCell(cell);
-        curIndexState=cell.value.statusList[stateselect.value];
-        var btncor=linebtn.children[0].style.backgroundColor;
-        if(linebtncor=='defined'){
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,linecor);
-        }else{
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,btncor);
+        curIndexState = cell.value.statusList[stateselect.value];
+        var btncor = linebtn.children[0].style.backgroundColor;
+        if (linebtncor == 'defined') {
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, linecor);
+        } else {
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, btncor);
         }
         var styleAry = curIndexState.graphStyle.split(/[=;]/g);
-        var colorIndex = styleAry.findIndex(function (item){return item == 'stroke'}) + 1;
-        curIndexState.graphStyle = curIndexState.graphStyle.replace('stroke='+styleAry[colorIndex],'stroke='+btncor);
-        GEdge.dataSrc=datasource.options[datasource.selectedIndex].value;
-        GEdge.measTable=meterselect.options[meterselect.selectedIndex].value;
-        GEdge.dataIds=testptinput.value;
+        var colorIndex = styleAry.findIndex(function (item) {
+                return item == 'stroke'
+            }) + 1;
+        curIndexState.graphStyle = curIndexState.graphStyle.replace('stroke=' + styleAry[colorIndex], 'stroke=' + btncor);
+        GEdge.dataSrc = datasource.options[datasource.selectedIndex].value;
+        GEdge.measTable = meterselect.options[meterselect.selectedIndex].value;
+        GEdge.dataIds = testptinput.value;
         ui.hideDialog.apply(ui, arguments);
     });
     cancelBtn.className = 'geBtn';
@@ -6628,7 +6792,7 @@ var LibraryDialogEX = function (sidebar, metaId, itemname, filename, content, ce
     var outer = document.createElement('div');
     outer.style.height = '100%';
 
-    var deleteCellTempList=[];
+    var deleteCellTempList = [];
 
     var header = document.createElement('div');
     header.style.whiteSpace = 'nowrap';

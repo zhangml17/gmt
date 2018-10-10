@@ -727,7 +727,38 @@ BaseFormatPanel.prototype.installInputHandler = function(input, key, defaultValu
 	
 	var selState = null;
 	var updating = false;
-	
+
+    function rotateCell(cell, angle, parent) {
+        if (angle != 0) {
+            var model = graph.getModel();
+            if (model.isVertex(cell) || model.isEdge(cell)) {
+                if (!model.isEdge(cell)) {
+                    var state = graph.view.getState(cell);
+                    var style = (state != null) ? state.style : graph.getCellStyle(cell);
+                    if (style != null) {
+                        var total = (style[mxConstants.STYLE_ROTATION] || 0) + angle;
+                        graph.setCellStyles(mxConstants.STYLE_ROTATION, total, [cell]);
+                    }
+                }
+                var geo = graph.getCellGeometry(cell);
+                if (geo != null) {
+                    var pgeo = graph.getCellGeometry(parent);
+                    if (pgeo != null && !model.isEdge(parent)) {
+                        geo = geo.clone();
+                        geo.rotate(angle, new mxPoint(pgeo.width / 2, pgeo.height / 2));
+                        model.setGeometry(cell, geo);
+                    }
+                    if ((model.isVertex(cell) && !geo.relative) || model.isEdge(cell)) {
+                        // Recursive rotation
+                        var childCount = model.getChildCount(cell);
+                        for (var i = 0; i < childCount; i++) {
+                            rotateCell(model.getChildAt(cell, i), angle, cell);
+                        }
+                    }
+                }
+            }
+        }
+    }
 	var update = mxUtils.bind(this, function(evt)
 	{
 		var value = (isFloat) ? parseFloat(input.value) : parseInt(input.value);
@@ -768,43 +799,52 @@ BaseFormatPanel.prototype.installInputHandler = function(input, key, defaultValu
 				graph.stopEditing(true);
 			}
 			
-			graph.getModel().beginUpdate();
-			try
-			{
-				graph.setCellStyles(key, value, graph.getSelectionCells());
-				
-				// Handles special case for fontSize where HTML labels are parsed and updated
-				if (key == mxConstants.STYLE_FONTSIZE)
-				{
-					var cells = graph.getSelectionCells();
-					
-					for (var i = 0; i < cells.length; i++)
-					{
-						var cell = cells[i];
-							
-						// Changes font tags inside HTML labels
-						if (graph.isHtmlLabel(cell))
-						{
-							var div = document.createElement('div');
-							div.innerHTML = graph.convertValueToString(cell);
-							var elts = div.getElementsByTagName('font');
-							
-							for (var j = 0; j < elts.length; j++)
-							{
-								elts[j].removeAttribute('size');
-								elts[j].style.fontSize = value + 'px';
-							}
-							
-							graph.cellLabelChanged(cell, div.innerHTML)
-						}
-					}
-				}
-			}
-			finally
-			{
-				graph.getModel().endUpdate();
-			}
-			
+			// graph.getModel().beginUpdate();
+			// try
+			// {
+			// 	graph.setCellStyles(key, value, graph.getSelectionCells());
+			//
+			// 	// Handles special case for fontSize where HTML labels are parsed and updated
+			// 	if (key == mxConstants.STYLE_FONTSIZE)
+			// 	{
+			// 		var cells = graph.getSelectionCells();
+			//
+			// 		for (var i = 0; i < cells.length; i++)
+			// 		{
+			// 			var cell = cells[i];
+			//
+			// 			// Changes font tags inside HTML labels
+			// 			if (graph.isHtmlLabel(cell))
+			// 			{
+			// 				var div = document.createElement('div');
+			// 				div.innerHTML = graph.convertValueToString(cell);
+			// 				var elts = div.getElementsByTagName('font');
+			//
+			// 				for (var j = 0; j < elts.length; j++)
+			// 				{
+			// 					elts[j].removeAttribute('size');
+			// 					elts[j].style.fontSize = value + 'px';
+			// 				}
+			//
+			// 				graph.cellLabelChanged(cell, div.innerHTML)
+			// 			}
+			// 		}
+			// 	}
+			// }
+			// finally
+			// {
+			// 	graph.getModel().endUpdate();
+			// }
+            var cells=graph.getSelectionCells();
+            cells.forEach(function (cell) {
+                var angle = 0;
+                var state = graph.view.getState(cell);
+                var style = (state != null) ? state.style : graph.getCellStyle(cell);
+                if (style != null) {
+                    angle = value - (style[mxConstants.STYLE_ROTATION] || 0);
+                }
+                rotateCell(cell, angle);
+            });
 			ui.fireEvent(new mxEventObject('styleChanged', 'keys', [key],
 					'values', [value], 'cells', graph.getSelectionCells()));
 		}
@@ -1599,15 +1639,15 @@ ArrangePanel.prototype.init = function()
 		this.container.appendChild(this.addAngle(this.createPanel()));
 	}
 	
-	if (!ss.containsLabel && ss.edges.length == 0)
-	{
-		this.container.appendChild(this.addFlip(this.createPanel()));
-	}
+	// if (!ss.containsLabel && ss.edges.length == 0)
+	// {
+	// 	this.container.appendChild(this.addFlip(this.createPanel()));
+	// }
 
 	if (ss.vertices.length > 1)
 	{
 		this.container.appendChild(this.addAlign(this.createPanel()));
-		this.container.appendChild(this.addDistribute(this.createPanel()));
+		// this.container.appendChild(this.addDistribute(this.createPanel()));
 	}
 	
 	this.container.appendChild(this.addGroupOps(this.createPanel()));
@@ -1914,7 +1954,7 @@ ArrangePanel.prototype.addAngle = function(div)
 		input = this.addUnitInput(div, '°', 20, 44, function()
 		{
 			update.apply(this, arguments);
-		});
+		},10);
 		
 		mxUtils.br(div);
 		div.style.paddingTop = '10px';
@@ -5709,6 +5749,7 @@ ParameterPanel.prototype.addParamTagProfile = function(div) {
     var cell = this.editorUi.editor.graph.getSelectionCell();
     var ui = this.editorUi;
     var graph = GModel.graph;
+    console.log(cell);
     if (!cell || !cell.value) {
     	//没有参数时 隐藏div
     	div.style.display="none";
@@ -5786,18 +5827,13 @@ ParameterPanel.prototype.addParamTagProfile = function(div) {
                     tempDiv.appendChild(valueinput);
                     div.appendChild(tempDiv);
                     mxEvent.addListener(valueinput, 'change', function () {
-
-                    	try{
-                            if (this.name === 'title') {
-                    			// cell.value.title = this.value;
-							}
-                    		
-                    	}finally{
-        					graph.getModel().endUpdate();
-        				}
                         graph.getModel().beginUpdate();
+                        try{
+                            gObj.setAttribute(this.name,this.value);
+                        }finally{
+                            graph.getModel().endUpdate();
+                        }
                     });
-                    
                 }
                 if(obj.type=="booleanRadio"){
                     var valueinput = document.createElement('button');

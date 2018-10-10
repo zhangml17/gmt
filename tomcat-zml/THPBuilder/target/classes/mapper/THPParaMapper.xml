@@ -22,6 +22,7 @@
 		where ParaId=#{paraId};
 	</update>	
 	
+	<!-- select distinct 返回sys_paras表中paraLabel字段的唯一值  -->
 	<select id="getParaLabels" resultType="String">
 		select distinct paraLabel from sys_paras;
 	</select>

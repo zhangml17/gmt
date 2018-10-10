@@ -1,6 +1,6 @@
 # *DO NOT DIRECTLY EDIT THIS FILE, IT IS AUTOMATICALLY GENERATED AND IT IS BASED ON:*
 # https://docs.google.com/spreadsheet/ccc?key=0AmQEO36liL4FdDJLWVNMaVV2UmRKSnpXU09MYkdGbEE
-about=关于 THPower Cloud
+about=关于 Cloud
 accessDenied=访问被拒
 actualSize=实际尺寸
 add=添加
@@ -834,3 +834,4 @@ GElectricSwitch=开关模型
 noStatus=无状态
 on=闭合
 off=断开
+removeAndClose=解除关联

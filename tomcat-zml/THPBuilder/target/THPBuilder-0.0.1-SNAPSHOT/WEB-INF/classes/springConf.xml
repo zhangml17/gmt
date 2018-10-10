@@ -13,15 +13,27 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		
-		<!--
+		<!--localhost
 		<property name="url" value="jdbc:mysql://localhost:3306/thpcloud?useUnicode=true&amp;characterEncoding=UTF-8" /> 
 		<property name="username" value="root" />
-		<property name="password" value="admin" />
-		-->		
-		<!-- -->
-		<property name="url" value="jdbc:mysql://192.168.100.42:13306/thpcloud?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="password" value="admin" />-->
+		
+                <property name="url" value="jdbc:mysql://192.168.100.42:13306/thpcloud?useUnicode=true&amp;characterEncoding=UTF-8" /> 
+                <property name="username" value="root" />
+                <property name="password" value="root" />
+
+		
+		<!--xidian
+		<property name="url" value="jdbc:mysql://192.168.100.162:13306/thpcloud?useUnicode=true&amp;characterEncoding=UTF-8" /> 
 		<property name="username" value="root" />
-		<property name="password" value="root"/>
+		<property name="password" value="root" />
+		-->
+
+		<!--ksyun
+		<property name="url" value="jdbc:mysql://120.92.89.125:33061/thpcloud?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="admin"/>
+		 -->
 		
 	</bean>
 

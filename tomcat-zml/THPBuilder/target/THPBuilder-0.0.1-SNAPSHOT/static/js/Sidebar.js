@@ -1169,31 +1169,44 @@ Sidebar.prototype.init = function()
     var sidebar=this;
 	// this.addSearchPalette(true);
 	GModel.init(this.editorUi.editor.graph);
-    this.addCustomPalette(localStorage.getItem('customGraph'));
-    this.addGeneralPaletteEX(false);
     var pArr={
+        'CustomGraph':null,
         'DynamicPalette':null,
         'ElectricPalette':null,
         'DevicePalette':null
     };
-    this.getModelPaletteXML('DynamicPalette', function (metaId, metaContent, metaName) {
-        pArr['DynamicPalette']={metaId:metaId,metaContent:metaContent,metaName:metaName};
+    this.getModelPaletteXML('CustomGraph', function (rows) {
+        pArr['CustomGraph']=rows||[];
         initPalette();
     });
-    this.getModelPaletteXML('ElectricPalette', function (metaId, metaContent, metaName) {
-        pArr['ElectricPalette']={metaId:metaId,metaContent:metaContent,metaName:metaName};
+    this.getModelPaletteXML('DynamicPalette', function (rows) {
+        pArr['DynamicPalette']=rows||[];
         initPalette();
     });
-    this.getModelPaletteXML('DevicePalette', function (metaId, metaContent, metaName) {
-        pArr['DevicePalette']={metaId:metaId,metaContent:metaContent,metaName:metaName};
+    this.getModelPaletteXML('ElectricPalette', function (rows) {
+        pArr['ElectricPalette']=rows||[];
+        initPalette();
+    });
+    this.getModelPaletteXML('DevicePalette', function (rows) {
+        pArr['DevicePalette']=rows||[];
         initPalette();
     });
     //异步同调
     function initPalette(){
-        if(pArr['DynamicPalette'] && pArr['ElectricPalette'] && pArr['DevicePalette']){
-            sidebar.addDynamicPalette(pArr['DynamicPalette'].metaId, pArr['DynamicPalette'].metaContent, pArr['DynamicPalette'].metaName);
-            sidebar.addElectricPalette(pArr['ElectricPalette'].metaId, pArr['ElectricPalette'].metaContent, pArr['ElectricPalette'].metaName);
-            sidebar.addDevicePalette(pArr['DevicePalette'].metaId, pArr['DevicePalette'].metaContent, pArr['DevicePalette'].metaName);
+        if(pArr['CustomGraph'] && pArr['DynamicPalette'] && pArr['ElectricPalette'] && pArr['DevicePalette']){
+            if(pArr['CustomGraph'].length){
+                sidebar.addCustomPalette(pArr['CustomGraph'][0].metaId, pArr['CustomGraph'][0].metaContent, pArr['CustomGraph'][0].metaName);
+            }
+            sidebar.addGeneralPaletteEX(false);
+            if(pArr['DynamicPalette'].length){
+                sidebar.addDynamicPalette(pArr['DynamicPalette'][0].metaId, pArr['DynamicPalette'][0].metaContent, pArr['DynamicPalette'][0].metaName);
+            }
+            if(pArr['ElectricPalette'].length){
+                sidebar.addElectricPalette(pArr['ElectricPalette'][0].metaId, pArr['ElectricPalette'][0].metaContent, pArr['ElectricPalette'][0].metaName);
+            }
+            if(pArr['DevicePalette'].length){
+                sidebar.addDevicePalette(pArr['DevicePalette'][0].metaId, pArr['DevicePalette'][0].metaContent, pArr['DevicePalette'][0].metaName);
+            }
         }
     }
 };
@@ -1206,8 +1219,8 @@ Sidebar.prototype.getModelPaletteXML=function (metaLabel, call) {
         dataType : 'json',
         async : true,
         success : function(data, textStatus) {
-            if(data && data.rows.length>0){
-                call(data.rows[0].metaId, data.rows[0].metaContent, data.rows[0].metaName);
+            if(data){
+                call(data.rows);
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -1236,10 +1249,10 @@ Sidebar.prototype.updataModelPaletteByMetaId=function (metaId, metaContent, call
 /**
  * 自定义图元面板
  */
-Sidebar.prototype.addCustomPalette = function (xml) {
+Sidebar.prototype.addCustomPalette = function (metaId, metaContent, metaName) {
     var graph = this.editorUi.editor.graph;
-    var cellList = this.editorUi.stringToCells(xml);
-    var contentDiv = this.addPalettePrestrain('customGraph', mxResources.get('customGraph'), false, mxUtils.bind(this, function (content) {
+    var cellList = this.editorUi.stringToCells(metaContent);
+    var contentDiv = this.addPalettePrestrain(metaId, metaName, false, mxUtils.bind(this, function (content) {
         this.initCustomData(content, cellList);
     }));
     // 获取面板台头
@@ -1253,7 +1266,7 @@ Sidebar.prototype.addCustomPalette = function (xml) {
     contentDiv.style.border = '3px solid transparent';
     //编辑图元面板
     var editLibrary = mxUtils.bind(this, function (evt) {
-        var dlg = new LibraryDialogEX(this, null, 'customGraph', mxResources.get('customGraph'), contentDiv, cellList);
+        var dlg = new LibraryDialogEX(this, metaId, null, metaName, contentDiv, cellList);
         this.editorUi.showDialog(dlg.container, 640, 480, true, false);
         mxEvent.consume(evt);
     });
@@ -1286,7 +1299,7 @@ Sidebar.prototype.addCustomPalette = function (xml) {
         contentDiv.appendChild(this.createVertexTemplateFromCells(
             cells, bounds.width, bounds.height, (cells[0].title!=null&&cells[0].title!='') ? cells[0].title : mxResources.get('untitled'), true, false, false));
         var xml = graph.compress(mxUtils.getXml(graph.encodeCells(cellList)));
-        localStorage.setItem('customGraph', xml);
+        this.updataModelPaletteByMetaId(metaId, xml);
     });
     var addSelection = mxUtils.bind(this, function (evt) {
         if (!graph.isSelectionEmpty()) {
