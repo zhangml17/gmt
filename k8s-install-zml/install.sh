@@ -6,6 +6,7 @@ DEFAULT_HA=nginx
 DEFAULT_PROXY=iptables
 DEFAULT_VERSION=v1.11.1
 DEFAULT_REUSE=true
+
 #$0:获取命令行的第一个参数，即要执行的文本名
 usage(){
 cat << EOF
@@ -44,6 +45,7 @@ EOF
 exit -1
 }
 
+#获取命令行参数
 while getopts "um:p:n:a:i:c:x:v:rk:b:s:" opt;do 
   case "$opt" in
     u) usage
@@ -66,4 +68,16 @@ while getopts "um:p:n:a:i:c:x:v:rk:b:s:" opt;do
      ;;
   esac
 done
-[ -z "$*"] && usage
+
+#只输入脚本 其后未根任何参数时，输出脚本的usage
+#[ -z "$*"] && usage
+
+#当脚本命令之后没有-m参数时，提示必须带-m参数
+chk_var () {
+if [ -z "$2" ]; then
+  echo "$(date -d today +'%Y-%m-%d %H:%M:%S') - [ERROR] - no input for \"$1\", try \"$0 -u\"."
+  sleep 3
+  exit 1
+fi
+}
+chk_var -m $MASTER
